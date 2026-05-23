@@ -70,7 +70,7 @@ export default function MethodologyContent() {
           {/* Card 1 */}
           <div className="border border-[#E5E5E5] bg-white p-6">
             <span className="inline-block bg-[#1A1A1A] text-white text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
-              PRIMARY TRAINING DATA
+              {az ? 'ƏSAS TƏLİM MƏLUMATI' : 'PRIMARY TRAINING DATA'}
             </span>
             <p className="text-base font-semibold text-[#1A1A1A]">State Statistics Committee</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">stat.gov.az</p>
@@ -89,7 +89,7 @@ export default function MethodologyContent() {
           {/* Card 2 */}
           <div className="border border-[#E5E5E5] bg-white p-6">
             <span className="inline-block border border-[#1A1A1A] text-[#1A1A1A] text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
-              VALIDATION LAYER
+              {az ? 'DOĞRULAMA TƏBƏQƏSİ' : 'VALIDATION LAYER'}
             </span>
             <p className="text-base font-semibold text-[#1A1A1A]">World Bank Open Data API</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">api.worldbank.org/v2/country/AZ</p>
@@ -108,7 +108,7 @@ export default function MethodologyContent() {
           {/* Card 3 */}
           <div className="border border-[#E5E5E5] bg-white p-6">
             <span className="inline-block border border-[#E5E5E5] text-[#6B6B6B] text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
-              SCENARIO INPUTS
+              {az ? 'SSENARI DAXİLOLMALARI' : 'SCENARIO INPUTS'}
             </span>
             <p className="text-base font-semibold text-[#1A1A1A]">U.S. Energy Information Admin.</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">api.eia.gov/v2/petroleum</p>
@@ -127,7 +127,7 @@ export default function MethodologyContent() {
           {/* Card 4 */}
           <div className="border border-[#E5E5E5] bg-[#F8F8F6] p-6">
             <span className="inline-block border border-[#E5E5E5] bg-[#F8F8F6] text-[#6B6B6B] text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
-              NEXT PHASE
+              {az ? 'NÖVBƏTİ MƏRHƏLƏ' : 'NEXT PHASE'}
             </span>
             <p className="text-base font-semibold text-[#1A1A1A]">Central Bank of Azerbaijan</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">cbar.az/page-40/statistical-bulletin</p>
@@ -148,7 +148,7 @@ export default function MethodologyContent() {
 
       {/* Section 2 — ML Models */}
       <section className="mb-16">
-        <SectionLabel en="02 — MACHINE LEARNING ARCHITECTURE" az="02 — MAŞIN ÖYRƏNMƏSİ ARXİTEKTURASI" />
+        <SectionLabel en="02 — MACHINE LEARNING ARCHITECTURE" az="02 — MACHINE LEARNING ARXİTEKTURASI" />
 
         <div className="space-y-2">
           <SpecPanel
@@ -291,7 +291,7 @@ export default function MethodologyContent() {
         <div className="grid grid-cols-2 gap-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A] mb-4">
-              Backend &amp; ML Pipeline
+              {az ? 'Backend və ML Boru Kəməri' : 'Backend & ML Pipeline'}
             </p>
             <table className="w-full text-sm">
               <tbody>
@@ -305,7 +305,7 @@ export default function MethodologyContent() {
                   ['pandas / numpy', 'Data pipeline'],
                   ['scipy', 'Cubic spline interpolation'],
                   ['requests / BeautifulSoup', 'Scraping'],
-                  ['Render', 'Deployment'],
+                  ['Railway', 'Deployment'],
                 ].map(([pkg, role], i) => (
                   <tr key={i} className={`border-b border-[#F0F0F0] ${i % 2 === 1 ? 'bg-[#F8F8F6]' : ''}`}>
                     <td className="py-2 px-3 font-mono text-xs text-[#1A1A1A]">{pkg}</td>

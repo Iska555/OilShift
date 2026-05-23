@@ -13,9 +13,8 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { useLanguage } from '@/context/LanguageContext'
-import { t, interpolate } from '@/lib/i18n'
+import { t, interpolate, type Lang } from '@/lib/i18n'
 import SpecPanel from '@/components/SpecPanel'
-import TermPill from '@/components/TermPill'
 
 const MIN_YEAR = 1991
 const MAX_YEAR = 2024
@@ -30,32 +29,40 @@ const SECTOR_DISPLAY: Record<string, string> = {
   brent_annual_avg_usd: 'Oil Price',
 }
 
-const displayName = (s: string): string => SECTOR_DISPLAY[s] ?? s
+const SECTOR_DISPLAY_AZ: Record<string, string> = {
+  agriculture_va_pct_gdp: 'Kənd Təsərrüfatı',
+  services_va_pct_gdp: 'İstehlak Xidmətləri',
+  industry_va_pct_gdp: 'Sənaye',
+  unemployment_rate: 'Əmək Bazarı',
+  gross_capital_formation_pct: 'İnvestisiya',
+  trade_pct_gdp: 'Ticarət',
+  brent_annual_avg_usd: 'Neft Qiyməti',
+}
+
+function displayNameForLang(s: string, lang: Lang): string {
+  if (lang === 'az') return SECTOR_DISPLAY_AZ[s] ?? SECTOR_DISPLAY[s] ?? s
+  return SECTOR_DISPLAY[s] ?? s
+}
 
 const INTERPRETATIONS_EN: Record<string, string> = {
-  Agriculture: 'Consistent non-oil stabilizer',
-  Services: 'Oil boom amplifier, 2005–2008',
-  'Labor Market': 'Structural employment drag',
-  Industry: 'Post-boom mean reversion',
-  Investment: 'Cyclical, low average impact',
-  Trade: 'Minor, stable contribution',
-  'Oil Price': 'External shock transmission',
+  agriculture_va_pct_gdp: 'Consistent non-oil stabilizer',
+  services_va_pct_gdp: 'Oil boom amplifier, 2005–2008',
+  unemployment_rate: 'Structural employment drag',
+  industry_va_pct_gdp: 'Post-boom mean reversion',
+  gross_capital_formation_pct: 'Cyclical, low average impact',
+  trade_pct_gdp: 'Minor, stable contribution',
+  brent_annual_avg_usd: 'External shock transmission',
 }
 
 const INTERPRETATIONS_AZ: Record<string, string> = {
-  Agriculture: 'Davamlı qeyri-neft sabitləşdiricisi',
-  Services: 'Neft bumu gücləndiricisi, 2005–2008',
-  'Labor Market': 'Struktur məşğulluq əyləci',
-  Industry: 'Bum sonrası orta dəyərə qayıdış',
-  Investment: 'Dövri, aşağı ortalama təsir',
-  Trade: 'Kiçik, sabit töhfə',
-  'Oil Price': 'Xarici şok ötürücüsü',
+  agriculture_va_pct_gdp: 'Davamlı qeyri-neft sabitləşdiricisi',
+  services_va_pct_gdp: 'Neft bumu gücləndiricisi, 2005–2008',
+  unemployment_rate: 'Struktur məşğulluq maneəsi',
+  industry_va_pct_gdp: 'Bum sonrası orta dəyərə qayıdış',
+  gross_capital_formation_pct: 'Dövri, aşağı ortalama təsir',
+  trade_pct_gdp: 'Kiçik, sabit töhfə',
+  brent_annual_avg_usd: 'Xarici şok ötürücüsü',
 }
-
-const SHAP_EN = "SHAP (SHapley Additive exPlanations) — a method from cooperative game theory that assigns each sector a fair share of the credit (or blame) for that year's GDP growth prediction."
-const SHAP_AZ = "SHAP — kooperativ oyun nəzəriyyəsindən götürülmüş metod olub hər sektora həmin ilin ÜDM artım proqnozunda ədalətli pay (müsbət və ya mənfi) təyin edir."
-const XGBOOST_EN = "XGBoost — a gradient boosting algorithm that builds an ensemble of decision trees, each correcting the errors of the previous one. Chosen for its accuracy on small tabular datasets (34 observations)."
-const XGBOOST_AZ = "XGBoost — hər biri əvvəlkinin xətalarını düzəldən qərar ağacları ansamblu quran gradient artırma alqoritmi. Kiçik cədvəl məlumat bazalarında (34 müşahidə) yüksək dəqiqliyi ilə seçilmişdir."
 
 type ShapRow = {
   sector: string
@@ -122,7 +129,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
   const [loadingShap, setLoadingShap] = useState(true)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const unit = lang === 'az' ? t(lang, 'sectors.pp') : t(lang, 'sectors.pp')
+  const unit = t(lang, 'sectors.pp')
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current)
@@ -131,11 +138,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
       fetch(`http://localhost:8000/api/sectors/shap/${selectedYear}`)
         .then(r => (r.ok ? r.json() : []))
         .then((rows: ShapRow[]) =>
-          setShapData(
-            [...rows]
-              .sort((a, b) => b.shap_value - a.shap_value)
-              .map(r => ({ ...r, sector: displayName(r.sector) }))
-          )
+          setShapData([...rows].sort((a, b) => b.shap_value - a.shap_value))
         )
         .catch(() => setShapData([]))
         .finally(() => setLoadingShap(false))
@@ -150,9 +153,9 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
   const insightText = summaryRow
     ? interpolate(t(lang, 'sectors.insight'), {
         year: String(selectedYear),
-        top: displayName(summaryRow.top_sector),
+        top: displayNameForLang(summaryRow.top_sector, lang),
         topVal: Math.abs(summaryRow.top_shap).toFixed(2),
-        bottom: displayName(summaryRow.bottom_sector),
+        bottom: displayNameForLang(summaryRow.bottom_sector, lang),
         bottomVal: Math.abs(summaryRow.bottom_shap).toFixed(2),
       })
     : null
@@ -166,13 +169,13 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
     .map(r => ({ year: r.year, growth: r.predicted_growth }))
 
   const topSectorCounts = sectorSummary.reduce<Record<string, number>>((acc, r) => {
-    const name = displayName(r.top_sector)
-    acc[name] = (acc[name] ?? 0) + 1
+    acc[r.top_sector] = (acc[r.top_sector] ?? 0) + 1
     return acc
   }, {})
-  const dominantSector =
-    Object.entries(topSectorCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? '—'
-  const dominantSectorYears = topSectorCounts[dominantSector] ?? 0
+  const dominantSectorKey =
+    Object.entries(topSectorCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? ''
+  const dominantSector = dominantSectorKey ? displayNameForLang(dominantSectorKey, lang) : '—'
+  const dominantSectorYears = dominantSectorKey ? (topSectorCounts[dominantSectorKey] ?? 0) : 0
 
   const fillPct = ((selectedYear - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) * 100
 
@@ -314,7 +317,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
               {t(lang, 'sectors.callout.topDriver')}
             </p>
             <p className="text-base font-semibold text-[#1A6B3C] leading-tight mb-1">
-              {displayName(summaryRow.top_sector)}
+              {displayNameForLang(summaryRow.top_sector, lang)}
             </p>
             <p className="text-xs text-[#1A1A1A] tabular-nums font-mono">
               +{Math.abs(summaryRow.top_shap).toFixed(2)}{unit}
@@ -325,7 +328,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
               {t(lang, 'sectors.callout.topDrag')}
             </p>
             <p className="text-base font-semibold text-[#8B1A1A] leading-tight mb-1">
-              {displayName(summaryRow.bottom_sector)}
+              {displayNameForLang(summaryRow.bottom_sector, lang)}
             </p>
             <p className="text-xs text-[#1A1A1A] tabular-nums font-mono">
               −{Math.abs(summaryRow.bottom_shap).toFixed(2)}{unit}
@@ -345,11 +348,48 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
         </div>
       )}
 
+      {/* Terminology panel — directly above waterfall chart */}
+      <div className="mb-6">
+        <SpecPanel
+          label="XGBOOST + SHAP — MODEL TERMINOLOGY"
+          labelAz="XGBOOST + SHAP — MODEL TERMİNOLOGİYASI"
+          defaultOpen={false}
+        >
+          <div className="space-y-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A] mb-2">XGBoost</p>
+              <p className="text-sm text-[#6B6B6B] leading-relaxed">
+                {lang === 'az'
+                  ? 'Hər biri əvvəlkinin xətalarını düzəldən qərar ağacları ansamblu quran gradient artırma alqoritmi. Kiçik cədvəl məlumat bazalarında (34 illik müşahidə) yüksək dəqiqliyi ilə seçilmişdir.'
+                  : 'A gradient boosting algorithm that builds an ensemble of decision trees, each correcting errors of the previous. Chosen for accuracy on small tabular datasets (34 annual observations).'}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A] mb-2">SHAP</p>
+              <p className="text-sm text-[#6B6B6B] leading-relaxed">
+                {lang === 'az'
+                  ? 'Hər sektora həmin ilin ÜDM artım proqnozunda ədalətli marjinal töhfə təyin edən metod — kooperativ oyun nəzəriyyəsindən götürülmüşdür.'
+                  : "SHapley Additive exPlanations — assigns each sector a fair marginal contribution to that year's GDP growth prediction, derived from cooperative game theory."}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A] mb-2">
+                {lang === 'az' ? 'f.b. (Faiz Bəndi)' : 'pp (Percentage Points)'}
+              </p>
+              <p className="text-sm text-[#6B6B6B] leading-relaxed">
+                {lang === 'az'
+                  ? 'f.b. = faiz bəndi. +1 f.b. SHAP dəyəri həmin sektorun o ildə model bazasının üzərindəki ÜDM artımına 1 faiz bəndi əlavə etdiyini bildirir.'
+                  : "pp = percentage points. A +1pp SHAP value means that sector added 1 percentage point to GDP growth that year above the model baseline."}
+              </p>
+            </div>
+          </div>
+        </SpecPanel>
+      </div>
+
       {/* Waterfall chart */}
       <div className="mb-2">
-        <p className="text-xs uppercase tracking-[0.12em] text-[#6B6B6B] mb-4 flex items-center gap-1">
+        <p className="text-xs uppercase tracking-[0.12em] text-[#6B6B6B] mb-4">
           {chartTitle}
-          <TermPill enText={SHAP_EN} azText={SHAP_AZ} />
         </p>
         <div style={{ height: Math.max(shapData.length, 5) * 44 + 24 }}>
           {loadingShap ? (
@@ -372,10 +412,11 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
                 <YAxis
                   type="category"
                   dataKey="sector"
+                  tickFormatter={(v) => displayNameForLang(String(v), lang)}
                   tickLine={false}
                   axisLine={false}
                   tick={{ fontSize: 12, fill: '#1A1A1A' }}
-                  width={120}
+                  width={140}
                 />
                 <ReferenceLine x={0} stroke="#1A1A1A" strokeWidth={1} />
                 <Bar
@@ -455,23 +496,11 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
         </div>
       </section>
 
-      {/* Explainer */}
-      <div className="mb-10">
-        <SpecPanel
-          label="WHAT ARE SHAP VALUES + MODEL SPECIFICATION"
-          labelAz="SHAP DƏYƏRLƏRİ + MODEL SPESİFİKASİYASI"
-        >
-          <p className="text-[#6B6B6B]">{t(lang, 'explainer.shap.body')}</p>
-        </SpecPanel>
-      </div>
-
       {/* Importance table */}
       {importanceData.length > 0 && (
         <section className="border-t border-[#E5E5E5] pt-8">
-          <p className="text-xs uppercase tracking-[0.15em] text-[#6B6B6B] mb-1 flex items-center gap-1">
+          <p className="text-xs uppercase tracking-[0.15em] text-[#6B6B6B] mb-1">
             {t(lang, 'sectors.table.title')}
-            <TermPill enText={SHAP_EN} azText={SHAP_AZ} />
-            <TermPill enText={XGBOOST_EN} azText={XGBOOST_AZ} />
           </p>
           <p className="text-xs text-[#6B6B6B] mb-6">{t(lang, 'sectors.table.subtitle')}</p>
           <table className="w-full text-sm border-collapse">
@@ -489,19 +518,18 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
             </thead>
             <tbody>
               {importanceData.map((row, i) => {
-                const name = displayName(row.sector)
                 const rawVal = row.mean_abs_shap ?? row.mean_shap ?? row.value ?? null
                 return (
                   <tr
                     key={row.sector}
                     className={`border-b border-[#E5E5E5] ${i % 2 === 1 ? 'bg-[#F8F8F6]' : 'bg-white'}`}
                   >
-                    <td className="px-4 py-3 text-[#1A1A1A]">{name}</td>
+                    <td className="px-4 py-3 text-[#1A1A1A]">{displayNameForLang(row.sector, lang)}</td>
                     <td className="px-4 py-3 tabular-nums text-[#1A1A1A] font-mono text-xs">
                       {rawVal != null ? `${Number(rawVal).toFixed(2)}${unit}` : '—'}
                     </td>
                     <td className="px-4 py-3 text-[#6B6B6B] text-xs">
-                      {INTERPRETATIONS[name] ?? '—'}
+                      {INTERPRETATIONS[row.sector] ?? '—'}
                     </td>
                   </tr>
                 )

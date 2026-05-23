@@ -3,12 +3,6 @@
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/i18n'
 import SHAPWaterfall from '@/components/charts/SHAPWaterfall'
-import TermPill from '@/components/TermPill'
-
-const SHAP_EN = "SHAP (SHapley Additive exPlanations) — a method from cooperative game theory that assigns each sector a fair share of the credit (or blame) for that year's GDP growth prediction."
-const SHAP_AZ = "SHAP — kooperativ oyun nəzəriyyəsindən götürülmüş metod olub hər sektora həmin ilin ÜDM artım proqnozunda ədalətli pay (müsbət və ya mənfi) təyin edir."
-const XGBOOST_EN = "XGBoost — a gradient boosting algorithm that builds an ensemble of decision trees, each correcting the errors of the previous one. Chosen for its accuracy on small tabular datasets (34 observations)."
-const XGBOOST_AZ = "XGBoost — hər biri əvvəlkinin xətalarını düzəldən qərar ağacları ansamblu quran gradient artırma alqoritmi. Kiçik cədvəl məlumat bazalarında (34 müşahidə) yüksək dəqiqliyi ilə seçilmişdir."
 
 type ImportanceRow = {
   sector: string
@@ -47,9 +41,7 @@ export default function SectorsContent({ importanceData, sectorSummary }: Props)
           </p>
         </div>
         <div className="text-right text-xs text-[#6B6B6B] whitespace-nowrap shrink-0 ml-8 mt-1">
-          <p className="flex items-center justify-end gap-1">
-            XGBoost<TermPill enText={XGBOOST_EN} azText={XGBOOST_AZ} /> + SHAP<TermPill enText={SHAP_EN} azText={SHAP_AZ} />
-          </p>
+          <p>XGBoost + SHAP</p>
           <p className="mt-0.5 text-[#B0B0B0]">1991–2024</p>
         </div>
       </section>

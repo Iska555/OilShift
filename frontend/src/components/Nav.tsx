@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/i18n'
 import type { TranslationKey } from '@/lib/i18n'
@@ -46,7 +47,10 @@ export default function Nav() {
               }`}
               style={{ transition: 'color 150ms' }}
             >
-              🇬🇧 EN
+              <span className="flex items-center gap-1.5">
+                <Image src="/flag-en.png" alt="EN" width={20} height={14} className="inline-block" />
+                EN
+              </span>
             </button>
             <div className="w-px h-3 bg-[#E5E5E5] mx-1.5" />
             <button
@@ -58,7 +62,10 @@ export default function Nav() {
               }`}
               style={{ transition: 'color 150ms' }}
             >
-              🇦🇿 AZ
+              <span className="flex items-center gap-1.5">
+                <Image src="/flag-az.png" alt="AZ" width={20} height={14} className="inline-block" />
+                AZ
+              </span>
             </button>
           </div>
         </div>
