@@ -1,0 +1,16 @@
+break_year,series_affected,series_count,mean_magnitude
+1991,['gdp_growth_pct'],1,-21.099999919369395
+1992,['cpi_inflation_pct'],1,1077.9553021010524
+1994,['gdp_growth_pct'],1,20.233333576707068
+1996,"['cpi_inflation_pct', 'gdp_growth_pct']",2,-340.9989851891576
+1999,"['industry_va_pct_gdp', 'nonoil_gdp_share_pct', 'oil_gdp_share_pct']",3,1.6585310556691155
+2003,['cpi_inflation_pct'],1,6.05504567486817
+2004,"['brent_annual_avg_usd', 'gdp_growth_pct', 'industry_va_pct_gdp', 'nonoil_gdp_share_pct', 'oil_gdp_share_pct']",5,13.827546766323271
+2006,['cpi_inflation_pct'],1,4.762842641006106
+2007,['gdp_growth_pct'],1,-21.04706363649237
+2008,['cpi_inflation_pct'],1,-10.278504342665013
+2009,['gdp_growth_pct'],1,-13.335127247702529
+2010,['brent_annual_avg_usd'],1,31.234722222222217
+2013,"['industry_va_pct_gdp', 'nonoil_gdp_share_pct', 'oil_gdp_share_pct']",3,-4.176372906686065
+2014,['brent_annual_avg_usd'],1,-56.38777777777778
+2020,['brent_annual_avg_usd'],1,25.577777777777776

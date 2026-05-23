@@ -1,0 +1,239 @@
+year,sector,shap_value,direction,sector_label
+1991,unemployment_rate,3.1722943782806396,positive,Labor Market
+1991,brent_annual_avg_usd,1.3684589862823486,positive,Oil Price
+1991,trade_pct_gdp,0.016860032454133034,positive,Trade
+1991,gross_capital_formation_pct,-0.7056006193161011,negative,Investment
+1991,services_va_pct_gdp,-0.7626739144325256,negative,Services
+1991,industry_va_pct_gdp,-1.3747656345367432,negative,Industry
+1991,agriculture_va_pct_gdp,-6.442920684814453,negative,Agriculture
+1992,trade_pct_gdp,-0.9335688948631287,negative,Trade
+1992,gross_capital_formation_pct,-1.1299993991851807,negative,Investment
+1992,services_va_pct_gdp,-1.3996245861053467,negative,Services
+1992,brent_annual_avg_usd,-1.892935872077942,negative,Oil Price
+1992,industry_va_pct_gdp,-3.362920045852661,negative,Industry
+1992,unemployment_rate,-3.661022663116455,negative,Labor Market
+1992,agriculture_va_pct_gdp,-14.086726188659668,negative,Agriculture
+1993,gross_capital_formation_pct,-0.8996146321296692,negative,Investment
+1993,trade_pct_gdp,-0.9802377820014954,negative,Trade
+1993,services_va_pct_gdp,-1.4681055545806885,negative,Services
+1993,brent_annual_avg_usd,-2.0531821250915527,negative,Oil Price
+1993,industry_va_pct_gdp,-3.452331066131592,negative,Industry
+1993,unemployment_rate,-3.6570115089416504,negative,Labor Market
+1993,agriculture_va_pct_gdp,-14.006495475769043,negative,Agriculture
+1994,trade_pct_gdp,-1.0819003582000732,negative,Trade
+1994,gross_capital_formation_pct,-1.3598744869232178,negative,Investment
+1994,services_va_pct_gdp,-1.7668622732162476,negative,Services
+1994,unemployment_rate,-1.897288203239441,negative,Labor Market
+1994,brent_annual_avg_usd,-1.9073408842086792,negative,Oil Price
+1994,industry_va_pct_gdp,-2.7370097637176514,negative,Industry
+1994,agriculture_va_pct_gdp,-12.708102226257324,negative,Agriculture
+1995,gross_capital_formation_pct,0.06358368694782257,positive,Investment
+1995,trade_pct_gdp,0.020026573911309242,positive,Trade
+1995,unemployment_rate,-0.8875457048416138,negative,Labor Market
+1995,brent_annual_avg_usd,-1.2732901573181152,negative,Oil Price
+1995,services_va_pct_gdp,-1.6915847063064575,negative,Services
+1995,industry_va_pct_gdp,-2.8824543952941895,negative,Industry
+1995,agriculture_va_pct_gdp,-9.313010215759277,negative,Agriculture
+1996,unemployment_rate,1.2601733207702637,positive,Labor Market
+1996,gross_capital_formation_pct,0.9853125810623169,positive,Investment
+1996,trade_pct_gdp,-0.09802507609128952,negative,Trade
+1996,brent_annual_avg_usd,-0.22126884758472443,negative,Oil Price
+1996,agriculture_va_pct_gdp,-0.38467514514923096,negative,Agriculture
+1996,services_va_pct_gdp,-1.2203906774520874,negative,Services
+1996,industry_va_pct_gdp,-2.5983951091766357,negative,Industry
+1997,unemployment_rate,2.7370107173919678,positive,Labor Market
+1997,agriculture_va_pct_gdp,1.98188316822052,positive,Agriculture
+1997,gross_capital_formation_pct,1.176306128501892,positive,Investment
+1997,trade_pct_gdp,-0.10765031725168228,negative,Trade
+1997,brent_annual_avg_usd,-0.7244834303855896,negative,Oil Price
+1997,services_va_pct_gdp,-1.1602938175201416,negative,Services
+1997,industry_va_pct_gdp,-1.9178425073623657,negative,Industry
+1998,unemployment_rate,4.092942714691162,positive,Labor Market
+1998,agriculture_va_pct_gdp,3.802978754043579,positive,Agriculture
+1998,gross_capital_formation_pct,2.4096262454986572,positive,Investment
+1998,trade_pct_gdp,0.5536286234855652,positive,Trade
+1998,brent_annual_avg_usd,-0.7019866704940796,negative,Oil Price
+1998,services_va_pct_gdp,-2.026693105697632,negative,Services
+1998,industry_va_pct_gdp,-2.217073678970337,negative,Industry
+1999,unemployment_rate,3.924226999282837,positive,Labor Market
+1999,agriculture_va_pct_gdp,3.584113597869873,positive,Agriculture
+1999,gross_capital_formation_pct,1.020301103591919,positive,Investment
+1999,brent_annual_avg_usd,-0.4094076454639435,negative,Oil Price
+1999,trade_pct_gdp,-0.9556100964546204,negative,Trade
+1999,industry_va_pct_gdp,-1.8893333673477173,negative,Industry
+1999,services_va_pct_gdp,-1.8999073505401611,negative,Services
+2000,unemployment_rate,4.23115873336792,positive,Labor Market
+2000,agriculture_va_pct_gdp,3.539862632751465,positive,Agriculture
+2000,trade_pct_gdp,0.4396180510520935,positive,Trade
+2000,industry_va_pct_gdp,0.09002707898616791,positive,Industry
+2000,brent_annual_avg_usd,-0.15521632134914398,negative,Oil Price
+2000,gross_capital_formation_pct,-0.19725638628005981,negative,Investment
+2000,services_va_pct_gdp,-1.0418938398361206,negative,Services
+2001,unemployment_rate,4.056447505950928,positive,Labor Market
+2001,agriculture_va_pct_gdp,3.494508743286133,positive,Agriculture
+2001,trade_pct_gdp,-0.00205732649192214,negative,Trade
+2001,industry_va_pct_gdp,-0.06923427432775497,negative,Industry
+2001,brent_annual_avg_usd,-0.1773814707994461,negative,Oil Price
+2001,gross_capital_formation_pct,-0.1965395212173462,negative,Investment
+2001,services_va_pct_gdp,-0.9896063208580017,negative,Services
+2002,unemployment_rate,3.9671311378479004,positive,Labor Market
+2002,agriculture_va_pct_gdp,3.4782633781433105,positive,Agriculture
+2002,gross_capital_formation_pct,0.7444215416908264,positive,Investment
+2002,brent_annual_avg_usd,-0.24743951857089996,negative,Oil Price
+2002,trade_pct_gdp,-0.5201265811920166,negative,Trade
+2002,industry_va_pct_gdp,-0.5862553119659424,negative,Industry
+2002,services_va_pct_gdp,-1.0710961818695068,negative,Services
+2003,unemployment_rate,3.7720823287963867,positive,Labor Market
+2003,agriculture_va_pct_gdp,3.0670933723449707,positive,Agriculture
+2003,trade_pct_gdp,1.207841157913208,positive,Trade
+2003,gross_capital_formation_pct,0.7601953744888306,positive,Investment
+2003,brent_annual_avg_usd,-0.24361753463745117,negative,Oil Price
+2003,services_va_pct_gdp,-1.0277602672576904,negative,Services
+2003,industry_va_pct_gdp,-1.3098009824752808,negative,Industry
+2004,agriculture_va_pct_gdp,3.015772819519043,positive,Agriculture
+2004,unemployment_rate,1.9926872253417969,positive,Labor Market
+2004,trade_pct_gdp,1.4494065046310425,positive,Trade
+2004,gross_capital_formation_pct,0.8874049186706543,positive,Investment
+2004,brent_annual_avg_usd,-0.3582519590854645,negative,Oil Price
+2004,industry_va_pct_gdp,-0.5986814498901367,negative,Industry
+2004,services_va_pct_gdp,-1.094112515449524,negative,Services
+2005,services_va_pct_gdp,8.323202133178711,positive,Services
+2005,agriculture_va_pct_gdp,4.399393558502197,positive,Agriculture
+2005,industry_va_pct_gdp,3.732272148132324,positive,Industry
+2005,trade_pct_gdp,2.927295207977295,positive,Trade
+2005,unemployment_rate,2.0526602268218994,positive,Labor Market
+2005,gross_capital_formation_pct,1.6197041273117065,positive,Investment
+2005,brent_annual_avg_usd,0.9879118204116821,positive,Oil Price
+2006,services_va_pct_gdp,11.62193775177002,positive,Services
+2006,industry_va_pct_gdp,5.774603366851807,positive,Industry
+2006,agriculture_va_pct_gdp,4.695042133331299,positive,Agriculture
+2006,trade_pct_gdp,2.9865543842315674,positive,Trade
+2006,gross_capital_formation_pct,2.256159782409668,positive,Investment
+2006,unemployment_rate,1.2068644762039185,positive,Labor Market
+2006,brent_annual_avg_usd,1.1288738250732422,positive,Oil Price
+2007,services_va_pct_gdp,10.08342170715332,positive,Services
+2007,agriculture_va_pct_gdp,3.640491008758545,positive,Agriculture
+2007,industry_va_pct_gdp,3.3986153602600098,positive,Industry
+2007,trade_pct_gdp,2.9327967166900635,positive,Trade
+2007,unemployment_rate,1.0145916938781738,positive,Labor Market
+2007,brent_annual_avg_usd,0.871871292591095,positive,Oil Price
+2007,gross_capital_formation_pct,-0.2006504237651825,negative,Investment
+2008,services_va_pct_gdp,5.491996765136719,positive,Services
+2008,industry_va_pct_gdp,2.0514655113220215,positive,Industry
+2008,brent_annual_avg_usd,0.6975875496864319,positive,Oil Price
+2008,unemployment_rate,0.689049482345581,positive,Labor Market
+2008,agriculture_va_pct_gdp,0.3915277123451233,positive,Agriculture
+2008,trade_pct_gdp,-0.7812986969947815,negative,Trade
+2008,gross_capital_formation_pct,-1.8258717060089111,negative,Investment
+2009,industry_va_pct_gdp,2.7540550231933594,positive,Industry
+2009,agriculture_va_pct_gdp,2.2747962474823,positive,Agriculture
+2009,brent_annual_avg_usd,1.2208503484725952,positive,Oil Price
+2009,unemployment_rate,0.498566210269928,positive,Labor Market
+2009,trade_pct_gdp,0.08389216661453247,positive,Trade
+2009,gross_capital_formation_pct,-0.3816734552383423,negative,Investment
+2009,services_va_pct_gdp,-1.070129632949829,negative,Services
+2010,industry_va_pct_gdp,1.8746885061264038,positive,Industry
+2010,agriculture_va_pct_gdp,1.2815215587615967,positive,Agriculture
+2010,brent_annual_avg_usd,1.0065841674804688,positive,Oil Price
+2010,trade_pct_gdp,0.26062488555908203,positive,Trade
+2010,gross_capital_formation_pct,-0.7262774705886841,negative,Investment
+2010,services_va_pct_gdp,-1.128324031829834,negative,Services
+2010,unemployment_rate,-1.6620221138000488,negative,Labor Market
+2011,industry_va_pct_gdp,0.9306373000144958,positive,Industry
+2011,agriculture_va_pct_gdp,0.7635119557380676,positive,Agriculture
+2011,brent_annual_avg_usd,-0.023780686780810356,negative,Oil Price
+2011,gross_capital_formation_pct,-0.6416198015213013,negative,Investment
+2011,trade_pct_gdp,-0.7648290991783142,negative,Trade
+2011,services_va_pct_gdp,-1.7140647172927856,negative,Services
+2011,unemployment_rate,-3.435865640640259,negative,Labor Market
+2012,industry_va_pct_gdp,1.837070345878601,positive,Industry
+2012,agriculture_va_pct_gdp,1.0125991106033325,positive,Agriculture
+2012,brent_annual_avg_usd,0.2792004644870758,positive,Oil Price
+2012,trade_pct_gdp,-0.0027679400518536568,negative,Trade
+2012,gross_capital_formation_pct,-0.5992947816848755,negative,Investment
+2012,services_va_pct_gdp,-1.0711556673049927,negative,Services
+2012,unemployment_rate,-3.1313374042510986,negative,Labor Market
+2013,industry_va_pct_gdp,1.9191200733184814,positive,Industry
+2013,agriculture_va_pct_gdp,1.3346549272537231,positive,Agriculture
+2013,brent_annual_avg_usd,1.0219645500183105,positive,Oil Price
+2013,trade_pct_gdp,0.6034277677536011,positive,Trade
+2013,gross_capital_formation_pct,0.3458232283592224,positive,Investment
+2013,services_va_pct_gdp,-0.9039157032966614,negative,Services
+2013,unemployment_rate,-2.807391881942749,negative,Labor Market
+2014,agriculture_va_pct_gdp,1.2705599069595337,positive,Agriculture
+2014,brent_annual_avg_usd,0.964804470539093,positive,Oil Price
+2014,industry_va_pct_gdp,0.7192935943603516,positive,Industry
+2014,gross_capital_formation_pct,0.15212608873844147,positive,Investment
+2014,trade_pct_gdp,-0.6366567015647888,negative,Trade
+2014,services_va_pct_gdp,-1.0248453617095947,negative,Services
+2014,unemployment_rate,-2.392484664916992,negative,Labor Market
+2015,agriculture_va_pct_gdp,1.8588337898254395,positive,Agriculture
+2015,gross_capital_formation_pct,0.29725754261016846,positive,Investment
+2015,brent_annual_avg_usd,0.2817692756652832,positive,Oil Price
+2015,trade_pct_gdp,0.12057410925626755,positive,Trade
+2015,industry_va_pct_gdp,-0.2609257102012634,negative,Industry
+2015,services_va_pct_gdp,-2.394421339035034,negative,Services
+2015,unemployment_rate,-2.674894094467163,negative,Labor Market
+2016,agriculture_va_pct_gdp,1.4438672065734863,positive,Agriculture
+2016,gross_capital_formation_pct,0.032594822347164154,positive,Investment
+2016,industry_va_pct_gdp,-0.44844573736190796,negative,Industry
+2016,trade_pct_gdp,-0.8310924768447876,negative,Trade
+2016,brent_annual_avg_usd,-0.8911523818969727,negative,Oil Price
+2016,services_va_pct_gdp,-2.521683931350708,negative,Services
+2016,unemployment_rate,-3.374682903289795,negative,Labor Market
+2017,agriculture_va_pct_gdp,1.6261600255966187,positive,Agriculture
+2017,brent_annual_avg_usd,0.640136182308197,positive,Oil Price
+2017,gross_capital_formation_pct,0.09586852043867111,positive,Investment
+2017,industry_va_pct_gdp,-0.025754084810614586,negative,Industry
+2017,trade_pct_gdp,-0.842059314250946,negative,Trade
+2017,services_va_pct_gdp,-2.2276570796966553,negative,Services
+2017,unemployment_rate,-3.0883047580718994,negative,Labor Market
+2018,agriculture_va_pct_gdp,1.1882513761520386,positive,Agriculture
+2018,brent_annual_avg_usd,1.0563992261886597,positive,Oil Price
+2018,industry_va_pct_gdp,0.8577559590339661,positive,Industry
+2018,gross_capital_formation_pct,-0.3290885090827942,negative,Investment
+2018,trade_pct_gdp,-1.0156686305999756,negative,Trade
+2018,services_va_pct_gdp,-1.0966295003890991,negative,Services
+2018,unemployment_rate,-2.9860732555389404,negative,Labor Market
+2019,agriculture_va_pct_gdp,1.833977222442627,positive,Agriculture
+2019,brent_annual_avg_usd,1.2934690713882446,positive,Oil Price
+2019,industry_va_pct_gdp,0.3600485026836395,positive,Industry
+2019,gross_capital_formation_pct,-0.2918235659599304,negative,Investment
+2019,trade_pct_gdp,-0.41075393557548523,negative,Trade
+2019,services_va_pct_gdp,-1.4473152160644531,negative,Services
+2019,unemployment_rate,-3.0438098907470703,negative,Labor Market
+2020,agriculture_va_pct_gdp,1.7969393730163574,positive,Agriculture
+2020,unemployment_rate,-0.4420195519924164,negative,Labor Market
+2020,brent_annual_avg_usd,-0.6345127820968628,negative,Oil Price
+2020,gross_capital_formation_pct,-0.9285891056060791,negative,Investment
+2020,trade_pct_gdp,-1.6853705644607544,negative,Trade
+2020,services_va_pct_gdp,-2.687281608581543,negative,Services
+2020,industry_va_pct_gdp,-2.917855739593506,negative,Industry
+2021,agriculture_va_pct_gdp,2.0875959396362305,positive,Agriculture
+2021,brent_annual_avg_usd,0.9712679386138916,positive,Oil Price
+2021,industry_va_pct_gdp,0.28517216444015503,positive,Industry
+2021,trade_pct_gdp,0.24137233197689056,positive,Trade
+2021,unemployment_rate,0.1649772673845291,positive,Labor Market
+2021,gross_capital_formation_pct,-0.5199217200279236,negative,Investment
+2021,services_va_pct_gdp,-1.2436758279800415,negative,Services
+2022,industry_va_pct_gdp,1.3143725395202637,positive,Industry
+2022,agriculture_va_pct_gdp,0.9836060404777527,positive,Agriculture
+2022,brent_annual_avg_usd,0.9762675166130066,positive,Oil Price
+2022,unemployment_rate,-0.2734091579914093,negative,Labor Market
+2022,trade_pct_gdp,-0.4500553607940674,negative,Trade
+2022,services_va_pct_gdp,-0.8398734927177429,negative,Services
+2022,gross_capital_formation_pct,-0.9463509917259216,negative,Investment
+2023,agriculture_va_pct_gdp,1.2685474157333374,positive,Agriculture
+2023,brent_annual_avg_usd,0.9697393178939819,positive,Oil Price
+2023,industry_va_pct_gdp,0.11154351383447647,positive,Industry
+2023,trade_pct_gdp,-0.31557950377464294,negative,Trade
+2023,gross_capital_formation_pct,-0.5606881976127625,negative,Investment
+2023,unemployment_rate,-1.6352607011795044,negative,Labor Market
+2023,services_va_pct_gdp,-2.1059978008270264,negative,Services
+2024,agriculture_va_pct_gdp,1.9397751092910767,positive,Agriculture
+2024,brent_annual_avg_usd,1.1358023881912231,positive,Oil Price
+2024,industry_va_pct_gdp,0.0016976520419120789,positive,Industry
+2024,trade_pct_gdp,-0.18322671949863434,negative,Trade
+2024,gross_capital_formation_pct,-0.2935473620891571,negative,Investment
+2024,unemployment_rate,-0.5051868557929993,negative,Labor Market
+2024,services_va_pct_gdp,-2.3591182231903076,negative,Services
