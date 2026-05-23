@@ -1,8 +1,33 @@
 'use client'
 
 import { useLanguage } from '@/context/LanguageContext'
-import { t } from '@/lib/i18n'
+import { t, type Lang } from '@/lib/i18n'
 import SHAPWaterfall from '@/components/charts/SHAPWaterfall'
+
+const SECTOR_DISPLAY: Record<string, string> = {
+  agriculture_va_pct_gdp: 'Agriculture',
+  services_va_pct_gdp: 'Services',
+  industry_va_pct_gdp: 'Industry',
+  unemployment_rate: 'Labor Market',
+  gross_capital_formation_pct: 'Investment',
+  trade_pct_gdp: 'Trade',
+  brent_annual_avg_usd: 'Oil Price',
+}
+
+const SECTOR_DISPLAY_AZ: Record<string, string> = {
+  agriculture_va_pct_gdp: 'Kənd Təsərrüfatı',
+  services_va_pct_gdp: 'İstehlak Xidmətləri',
+  industry_va_pct_gdp: 'Sənaye',
+  unemployment_rate: 'Əmək Bazarı',
+  gross_capital_formation_pct: 'İnvestisiya',
+  trade_pct_gdp: 'Ticarət',
+  brent_annual_avg_usd: 'Neft Qiyməti',
+}
+
+function displayNameForLang(key: string, lang: Lang): string {
+  if (lang === 'az') return SECTOR_DISPLAY_AZ[key] ?? SECTOR_DISPLAY[key] ?? key
+  return SECTOR_DISPLAY[key] ?? key
+}
 
 type ImportanceRow = {
   sector: string
@@ -50,7 +75,7 @@ export default function SectorsContent({ importanceData, sectorSummary }: Props)
       <section className="grid grid-cols-4 border border-[#E5E5E5] divide-x divide-[#E5E5E5] mb-10">
         <div className="px-6 py-5">
           <p className="text-2xl font-semibold text-[#1A1A1A] mb-1">
-            {t(lang, 'sectors.metric.topDriver.value')}
+            {displayNameForLang('agriculture_va_pct_gdp', lang)}
           </p>
           <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">
             {t(lang, 'sectors.metric.topDriver.label')}
@@ -58,7 +83,7 @@ export default function SectorsContent({ importanceData, sectorSummary }: Props)
         </div>
         <div className="px-6 py-5">
           <p className="text-2xl font-semibold text-[#1A1A1A] mb-1">
-            {t(lang, 'sectors.metric.peakContrib.value')}
+            {displayNameForLang('services_va_pct_gdp', lang)}
           </p>
           <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">
             {t(lang, 'sectors.metric.peakContrib.label')}
@@ -66,7 +91,7 @@ export default function SectorsContent({ importanceData, sectorSummary }: Props)
         </div>
         <div className="px-6 py-5">
           <p className="text-2xl font-semibold text-[#1A1A1A] mb-1">
-            {t(lang, 'sectors.metric.drag.value')}
+            {displayNameForLang('unemployment_rate', lang)}
           </p>
           <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">
             {t(lang, 'sectors.metric.drag.label')}
