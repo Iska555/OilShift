@@ -3,7 +3,7 @@ export default function Navigation() {
     <nav className="border-b border-[#E5E5E5] bg-white">
       <div className="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
         <span className="text-sm font-semibold text-[#1A1A1A] tracking-tight">
-          Azerbaijan Economic Intelligence
+          OilShift 
         </span>
         <div className="flex items-center gap-8 text-sm text-[#6B6B6B]">
           <a href="/divergence" className="hover:text-[#1A1A1A]">Divergence</a>

@@ -9,7 +9,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Azerbaijan Economic Intelligence Platform',
+  title: 'OilShift - Azerbaijan Economic Divergence Intelligence Platform',
   description: 'Machine-learning analysis of the oil-to-non-oil GDP structural transition, 2026–2050',
 }
 

@@ -275,7 +275,7 @@ const en: Translations = {
   'explainer.whatIsThis': 'WHAT IS THIS?',
   'explainer.methodologyNote': 'METHODOLOGY NOTE',
 
-  'footer.text': 'Azerbaijan Economic Intelligence Platform · Data: stat.gov.az, World Bank, EIA, CBAR · Built with Azerbaijan National AI Strategy 2025–2028',
+  'footer.text': 'Azerbaijan Economic Divergence Intelligence Platform · Data: stat.gov.az, World Bank, EIA, CBAR · Built with Azerbaijan National AI Strategy 2025–2028',
   'loading': 'Loading',
 
   // Anomaly page
@@ -448,7 +448,7 @@ const az: Translations = {
   'explainer.whatIsThis': 'BU NƏDİR?',
   'explainer.methodologyNote': 'METODOLOJİ QEYD',
 
-  'footer.text': 'Azərbaycan İqtisadi Kəşfiyyat Platforması · Məlumat mənbələri: stat.gov.az, Dünya Bankı, ABŞ EİA, Mərkəzi Bank · Azərbaycan Milli Süni İntellekt Strategiyası 2025–2028 çərçəvəsində hazırlanmışdır',
+  'footer.text': 'Azərbaycan İqtisadi Analiz Platforması · Məlumat mənbələri: stat.gov.az, Dünya Bankı, ABŞ EİA, Mərkəzi Bank · Azərbaycan Milli Süni İntellekt Strategiyası 2025–2028 çərçəvəsində hazırlanmışdır',
   'loading': 'Yüklənir',
 
   // Anomaly page
@@ -523,7 +523,7 @@ const az: Translations = {
   'sectors.pp': 'f.b.',
   'sectors.ppNote': 'f.b. = faiz bəndi — bu sektorun ÜDM artım sürətinə aid mütləq dəyişiklik. +1 f.b. həmin sektorun həmin ilin ÜDM artımına 1 faiz bəndi əlavə etdiyini bildirir.',
   'home.finding.headline': 'PLATFORMANIN ƏSAS KƏŞFİ',
-  'home.finding.pullquote': 'Barrel başına 80 ABŞ dolları sabit neft qiyməti şəraitində Azərbaycanın neft-qaz sektorunun ÜDM-dəki payı 2033-cü ilə qədər 20% siyasət həddinə çatacaq. Buna səbəb neft yataqlarının illik −2.5% həcmində struktur aşınması (tükənməsi) və qeyri-neft sektorundakı 4.5%-lik artımdır.',
+  'home.finding.pullquote': 'Davamlı olaraq barrel başına 80 ABŞ dolları sabit neft qiyməti fonunda 2033-cü ilə qədər Azərbaycanın ÜDM-də neftin payı hədəflənən 20%-lik limitdən aşağı həddə enəcəyi gözlənilir. Buna səbəb neft yataqlarının illik −2.5% həcmində struktur aşınması (tükənməsi) və qeyri-neft sektorundakı 4.5%-lik artımdır.',
   'home.finding.stat1.label': 'Əsas ssenaridə hədd keçidi',
   'home.finding.stat2.label': 'Model ehtimalı (1.000 yol)',
   'home.finding.stat3.label': 'Struktur istehsal azalması',

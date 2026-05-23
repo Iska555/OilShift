@@ -22,7 +22,7 @@ export default function Nav() {
     <nav className="bg-white border-b border-[#E5E5E5]">
       <div className="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
         <span className="text-sm font-semibold text-[#1A1A1A] tracking-tight shrink-0">
-          Azerbaijan Economic Intelligence
+          OilShift
         </span>
 
         <div className="flex items-center gap-8">
@@ -40,11 +40,10 @@ export default function Nav() {
           <div className="flex items-center ml-2">
             <button
               onClick={() => setLang('en')}
-              className={`text-xs px-1 pb-0.5 ${
-                lang === 'en'
+              className={`text-xs px-1 pb-0.5 ${lang === 'en'
                   ? 'text-[#1A1A1A] font-semibold border-b-2 border-[#1A1A1A]'
                   : 'text-[#6B6B6B] font-normal'
-              }`}
+                }`}
               style={{ transition: 'color 150ms' }}
             >
               <span className="flex items-center gap-1.5">
@@ -55,11 +54,10 @@ export default function Nav() {
             <div className="w-px h-3 bg-[#E5E5E5] mx-1.5" />
             <button
               onClick={() => setLang('az')}
-              className={`text-xs px-1 pb-0.5 ${
-                lang === 'az'
+              className={`text-xs px-1 pb-0.5 ${lang === 'az'
                   ? 'text-[#1A1A1A] font-semibold border-b-2 border-[#1A1A1A]'
                   : 'text-[#6B6B6B] font-normal'
-              }`}
+                }`}
               style={{ transition: 'color 150ms' }}
             >
               <span className="flex items-center gap-1.5">

@@ -259,7 +259,7 @@ export default function MethodologyContent() {
                 titleEn: 'Pilot Project Mechanism',
                 titleAz: 'Pilot Layihə Mexanizmi',
                 en: "The Action Plan's pilot track specifies working AI systems applied to national data. This platform is exactly that: a deployed, live intelligence tool built on official Azerbaijani statistics.",
-                az: "Fəaliyyət Planının pilot treki milli məlumatlara tətbiq edilmiş fəaliyyətdə olan süni intellekt sistemlərini müəyyən edir. Bu platforma məhz budur: rəsmi Azərbaycan statistikası əsasında qurulmuş, yerləşdirilmiş, canlı kəşfiyyat aləti.",
+                az: "Fəaliyyət Planının pilot treki milli məlumatlara tətbiq edilmiş fəaliyyətdə olan süni intellekt sistemlərini müəyyən edir. Bu platforma məhz budur: rəsmi Azərbaycan statistikası əsasında qurulmuş, yerləşdirilmiş, canlı analiz aləti.",
               },
               {
                 num: '04',
@@ -305,7 +305,7 @@ export default function MethodologyContent() {
                   ['pandas / numpy', 'Data pipeline'],
                   ['scipy', 'Cubic spline interpolation'],
                   ['requests / BeautifulSoup', 'Scraping'],
-                  ['Railway', 'Deployment'],
+                  ['Render', 'Deployment'],
                 ].map(([pkg, role], i) => (
                   <tr key={i} className={`border-b border-[#F0F0F0] ${i % 2 === 1 ? 'bg-[#F8F8F6]' : ''}`}>
                     <td className="py-2 px-3 font-mono text-xs text-[#1A1A1A]">{pkg}</td>
