@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #1A1A1A;
+  --font-sans: var(--font-inter);
+}
+
+body {
+  font-family: var(--font-sans, Inter, Arial, sans-serif);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.chart-fade-in {
+  animation: fadeIn 300ms ease-out;
+}
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.3; }
+  100% { transform: scale(1.4); opacity: 0;   }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+.pulse-ring-2 {
+  animation: pulse-ring 2s ease-out 0.5s infinite;
+  transform-box: fill-box;
+  transform-origin: center center;
+}
