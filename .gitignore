@@ -22,6 +22,7 @@ Thumbs.db
 
 # Claude Code
 .claude/
+CLAUDE.md
 
 # Root-level artifacts
 package-lock.json
