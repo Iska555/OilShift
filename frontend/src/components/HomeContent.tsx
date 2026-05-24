@@ -30,31 +30,31 @@ export default function HomeContent({ crossoverYear, shocksLabel }: Props) {
   return (
     <main>
       {/* Hero */}
-      <section className="max-w-[1200px] mx-auto px-6 pt-20 pb-16 border-b border-[#E5E5E5]">
+      <section className="max-w-[1200px] mx-auto px-6 pt-12 pb-12 md:pt-20 md:pb-16 border-b border-[#E5E5E5]">
         <p className="text-xs uppercase tracking-[0.15em] text-[#6B6B6B] mb-5">
           {t(lang, 'home.eyebrow')}
         </p>
 
         {lang === 'az' ? (
-          <h1 className="text-5xl tracking-tight text-[#1A1A1A] mb-5 max-w-2xl leading-[1.15]">
+          <h1 className="text-3xl md:text-5xl tracking-tight text-[#1A1A1A] mb-5 max-w-2xl leading-[1.15]">
             <span className="font-normal">{t(lang, 'home.h1.az.p1')} </span>
             <span className="font-bold">{t(lang, 'home.h1.az.p2')}</span>
           </h1>
         ) : (
-          <h1 className="text-5xl font-semibold tracking-tight text-[#1A1A1A] mb-5 max-w-2xl leading-[1.1]">
+          <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#1A1A1A] mb-5 max-w-2xl leading-[1.1]">
             {t(lang, 'home.h1')}
           </h1>
         )}
 
-        <p className="text-base text-[#6B6B6B] max-w-xl leading-relaxed mb-14">
+        <p className="text-base text-[#6B6B6B] max-w-xl leading-relaxed mb-10 md:mb-14">
           {t(lang, 'home.subtitle')}
         </p>
 
-        {/* Stat callouts with explainers */}
-        <div className="grid grid-cols-3 border border-[#E5E5E5] divide-x divide-[#E5E5E5]">
-          <div className="px-8 py-6 flex flex-col overflow-visible">
+        {/* Stat callouts */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 border border-[#E5E5E5] divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5]">
+          <div className="px-6 sm:px-8 py-6 flex flex-col overflow-visible">
             <div>
-              <p className="text-5xl font-semibold text-[#1A1A1A] mb-1.5">30.4%</p>
+              <p className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] mb-1.5">30.4%</p>
               <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">
                 {t(lang, 'home.stat.oilShare')}
               </p>
@@ -66,9 +66,9 @@ export default function HomeContent({ crossoverYear, shocksLabel }: Props) {
               />
             </div>
           </div>
-          <div className="px-8 py-6 flex flex-col overflow-visible">
+          <div className="px-6 sm:px-8 py-6 flex flex-col overflow-visible">
             <div>
-              <p className="text-5xl font-semibold text-[#1A1A1A] mb-1.5">{crossoverYear}</p>
+              <p className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] mb-1.5">{crossoverYear}</p>
               <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">
                 {t(lang, 'home.stat.crossoverYear')}
               </p>
@@ -80,9 +80,9 @@ export default function HomeContent({ crossoverYear, shocksLabel }: Props) {
               />
             </div>
           </div>
-          <div className="px-8 py-6 flex flex-col overflow-visible">
+          <div className="px-6 sm:px-8 py-6 flex flex-col overflow-visible">
             <div>
-              <p className="text-5xl font-semibold text-[#1A1A1A] mb-1.5">{shocksLabel}</p>
+              <p className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] mb-1.5">{shocksLabel}</p>
               <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">
                 {t(lang, 'home.stat.shocksValidated')}
               </p>
@@ -98,13 +98,13 @@ export default function HomeContent({ crossoverYear, shocksLabel }: Props) {
       </section>
 
       {/* Module cards */}
-      <section className="max-w-[1200px] mx-auto px-6 py-16 border-b border-[#E5E5E5]">
-        <div className="grid grid-cols-3 gap-6">
+      <section className="max-w-[1200px] mx-auto px-6 py-12 md:py-16 border-b border-[#E5E5E5]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           {MODULE_CARDS.map((card) => (
             <Link
               key={card.href}
               href={card.href}
-              className="border border-[#E5E5E5] p-8 flex flex-col justify-between"
+              className="border border-[#E5E5E5] p-6 md:p-8 flex flex-col justify-between"
             >
               <div>
                 <h2 className="text-base font-semibold text-[#1A1A1A] mb-3">
@@ -114,7 +114,7 @@ export default function HomeContent({ crossoverYear, shocksLabel }: Props) {
                   {t(lang, card.descKey)}
                 </p>
               </div>
-              <div className="mt-8 flex items-center gap-2 text-sm text-[#6B6B6B]">
+              <div className="mt-6 md:mt-8 flex items-center gap-2 text-sm text-[#6B6B6B]">
                 <span>{t(lang, 'home.card.viewAnalysis')}</span>
                 <ArrowRight size={14} strokeWidth={1.5} />
               </div>
@@ -125,17 +125,17 @@ export default function HomeContent({ crossoverYear, shocksLabel }: Props) {
 
       {/* Key finding */}
       <section className="border-y border-[#E5E5E5]">
-        <div className="max-w-[1200px] mx-auto px-6 py-12">
-          <div className="flex gap-16">
-            <div style={{ flex: '0 0 60%' }}>
+        <div className="max-w-[1200px] mx-auto px-6 py-10 md:py-12">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+            <div className="flex-1 min-w-0">
               <p className="text-xs uppercase tracking-[0.15em] text-[#6B6B6B] mb-5">
                 {t(lang, 'home.finding.headline')}
               </p>
-              <p className="text-2xl font-light text-[#1A1A1A] leading-relaxed">
+              <p className="text-xl md:text-2xl font-light text-[#1A1A1A] leading-relaxed">
                 {t(lang, 'home.finding.pullquote')}
               </p>
             </div>
-            <div style={{ flex: '0 0 40%' }}>
+            <div className="md:w-64 shrink-0">
               {[
                 { val: '2033', labelKey: 'home.finding.stat1.label' as const },
                 { val: '100%', labelKey: 'home.finding.stat2.label' as const },

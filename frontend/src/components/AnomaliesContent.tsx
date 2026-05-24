@@ -29,25 +29,25 @@ export default function AnomaliesContent() {
   return (
     <main className="max-w-[1200px] mx-auto px-6 py-12">
       {/* Page header */}
-      <section className="flex items-start justify-between mb-12 pb-10 border-b border-[#E5E5E5]">
+      <section className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between mb-12 pb-10 border-b border-[#E5E5E5]">
         <div>
           <p className="text-xs uppercase tracking-[0.15em] text-[#6B6B6B] mb-3">
             {t(lang, 'anomaly.eyebrow')}
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-[#1A1A1A] mb-3 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#1A1A1A] mb-3 leading-tight">
             {t(lang, 'anomaly.title')}
           </h1>
           <p className="text-sm text-[#6B6B6B] max-w-xl leading-relaxed">
             {t(lang, 'anomaly.subtitle')}
           </p>
         </div>
-        <span className="shrink-0 ml-8 mt-1 bg-[#1A1A1A] text-white text-xs px-3 py-1 rounded-full">
+        <span className="shrink-0 self-start sm:ml-8 sm:mt-1 bg-[#1A1A1A] text-white text-xs px-3 py-1 rounded-full">
           {t(lang, 'anomaly.badge')}
         </span>
       </section>
 
       {/* Headline metrics */}
-      <section className="grid grid-cols-4 border border-[#E5E5E5] divide-x divide-[#E5E5E5] mb-8">
+      <section className="grid grid-cols-2 md:grid-cols-4 border border-[#E5E5E5] divide-x divide-y md:divide-y-0 divide-[#E5E5E5] mb-8">
         <div className="px-6 py-5">
           <p className="text-3xl font-semibold text-[#1A1A1A] tabular-nums mb-1">4 / 4</p>
           <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B]">

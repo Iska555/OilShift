@@ -150,6 +150,14 @@ export default function DivergenceExplorer() {
   const [isDragging, setIsDragging] = useState(false)
   const [allCurves, setAllCurves] = useState<AllCurves | null>(null)
   const [loadError, setLoadError] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -222,7 +230,7 @@ export default function DivergenceExplorer() {
     <div>
       {/* Slider section */}
       <div className="mb-8">
-        <div className="flex items-start gap-12 mb-6">
+        <div className="flex flex-col md:flex-row md:items-start md:gap-12 gap-6 mb-6">
           {/* Price + slider */}
           <div className="flex-1 min-w-0">
             <div className="text-center mb-6">
@@ -299,7 +307,7 @@ export default function DivergenceExplorer() {
           </div>
 
           {/* Crossover year */}
-          <div className="w-56 shrink-0 pt-2">
+          <div className="w-full md:w-56 md:shrink-0 md:pt-2">
             <p className="text-xs text-[#6B6B6B] leading-relaxed mb-3">
               {t(lang, 'slider.fallsBelow20')}
             </p>
@@ -327,7 +335,7 @@ export default function DivergenceExplorer() {
       </div>
 
       {/* Chart */}
-      <div>
+      <div className="w-full overflow-hidden">
         <p className="text-xs font-semibold text-[#1A1A1A] tracking-tight mb-4">
           {chartTitle}
         </p>
@@ -347,11 +355,11 @@ export default function DivergenceExplorer() {
         )}
 
         {allCurves && (
-          <ResponsiveContainer width="100%" height={420}>
+          <ResponsiveContainer width="100%" height={isMobile ? 280 : 420}>
             <LineChart
               key={Math.round(brentPrice / 5) * 5}
               data={chartData}
-              margin={{ top: 24, right: 140, left: 0, bottom: 0 }}
+              margin={{ top: 24, right: isMobile ? 8 : 140, left: 0, bottom: 0 }}
             >
               <XAxis
                 dataKey="year"
@@ -376,7 +384,7 @@ export default function DivergenceExplorer() {
                 y={20}
                 stroke="#1A1A1A"
                 strokeDasharray="4 2"
-                label={{
+                label={isMobile ? undefined : {
                   value: policyTargetLabel,
                   position: 'insideTopRight',
                   fontSize: 10,
@@ -390,7 +398,7 @@ export default function DivergenceExplorer() {
                 y={30.4}
                 stroke="#B0B0B0"
                 strokeDasharray="4 2"
-                label={{
+                label={isMobile ? undefined : {
                   value: baselineLabel,
                   position: 'insideTopRight',
                   fontSize: 10,

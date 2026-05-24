@@ -56,23 +56,23 @@ export default function SectorsContent({ importanceData, sectorSummary }: Props)
   return (
     <main className="max-w-[1200px] mx-auto px-6 py-12">
       {/* Page header */}
-      <section className="flex items-start justify-between mb-12 pb-10 border-b border-[#E5E5E5]">
+      <section className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between mb-12 pb-10 border-b border-[#E5E5E5]">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-[#1A1A1A] mb-3 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#1A1A1A] mb-3 leading-tight">
             {t(lang, 'sectors.title')}
           </h1>
           <p className="text-sm text-[#6B6B6B] max-w-xl leading-relaxed">
             {t(lang, 'sectors.subtitle')}
           </p>
         </div>
-        <div className="text-right text-xs text-[#6B6B6B] whitespace-nowrap shrink-0 ml-8 mt-1">
+        <div className="text-left sm:text-right text-xs text-[#6B6B6B] sm:whitespace-nowrap shrink-0 sm:ml-8 sm:mt-1">
           <p>XGBoost + SHAP</p>
           <p className="mt-0.5 text-[#B0B0B0]">1991–2024</p>
         </div>
       </section>
 
       {/* Headline metrics */}
-      <section className="grid grid-cols-4 border border-[#E5E5E5] divide-x divide-[#E5E5E5] mb-10">
+      <section className="grid grid-cols-2 md:grid-cols-4 border border-[#E5E5E5] divide-x divide-y md:divide-y-0 divide-[#E5E5E5] mb-10">
         <div className="px-6 py-5">
           <p className="text-2xl font-semibold text-[#1A1A1A] mb-1">
             {displayNameForLang('agriculture_va_pct_gdp', lang)}

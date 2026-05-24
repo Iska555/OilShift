@@ -128,7 +128,15 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
   const [hoveredYear, setHoveredYear] = useState<number | null>(null)
   const [shapData, setShapData] = useState<ShapRow[]>([])
   const [loadingShap, setLoadingShap] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const unit = t(lang, 'sectors.pp')
 
@@ -152,13 +160,22 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
   const summaryRow = sectorSummary.find(r => r.year === selectedYear)
 
   const insightText = summaryRow
-    ? interpolate(t(lang, 'sectors.insight'), {
-        year: String(selectedYear),
-        top: displayNameForLang(summaryRow.top_sector, lang),
-        topVal: Math.abs(summaryRow.top_shap).toFixed(2),
-        bottom: displayNameForLang(summaryRow.bottom_sector, lang),
-        bottomVal: Math.abs(summaryRow.bottom_shap).toFixed(2),
-      })
+    ? lang === 'az'
+      ? (() => {
+          const suffix = azOrdinalSuffix(selectedYear)
+          const topName = displayNameForLang(summaryRow.top_sector, 'az')
+          const bottomName = displayNameForLang(summaryRow.bottom_sector, 'az')
+          const topVal = Math.abs(summaryRow.top_shap).toFixed(2)
+          const bottomVal = Math.abs(summaryRow.bottom_shap).toFixed(2)
+          return `${selectedYear}-${suffix} ildə ÜDM artımına ən çox töhfə verən sektor ${topName} olub (+${topVal} f.b.), ${bottomName} sektoru isə böyüməni ${bottomVal} f.b. zəiflədib.`
+        })()
+      : interpolate(t(lang, 'sectors.insight'), {
+          year: String(selectedYear),
+          top: displayNameForLang(summaryRow.top_sector, lang),
+          topVal: Math.abs(summaryRow.top_shap).toFixed(2),
+          bottom: displayNameForLang(summaryRow.bottom_sector, lang),
+          bottomVal: Math.abs(summaryRow.bottom_shap).toFixed(2),
+        })
     : null
 
   const chartTitle = interpolate(t(lang, 'sectors.waterfall.title'), {
@@ -181,6 +198,17 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
   const fillPct = ((selectedYear - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) * 100
 
   const INTERPRETATIONS = lang === 'az' ? INTERPRETATIONS_AZ : INTERPRETATIONS_EN
+
+  function azOrdinalSuffix(year: number): string {
+    const last1 = year % 10
+    const last2 = year % 100
+    if (last1 === 0) return last2 === 20 ? 'ci' : 'cu'
+    const map: Record<number, string> = {
+      1: 'ci', 2: 'ci', 3: 'cü', 4: 'cü',
+      5: 'ci', 6: 'cı', 7: 'ci', 8: 'ci', 9: 'cu',
+    }
+    return map[last1] ?? 'ci'
+  }
 
   return (
     <div>
@@ -312,7 +340,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
 
       {/* 3 sector dominance callout boxes */}
       {summaryRow && (
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div className="border border-[#E5E5E5] p-4">
             <p className="text-xs uppercase tracking-[0.1em] text-[#6B6B6B] mb-2">
               {t(lang, 'sectors.callout.topDriver')}
@@ -401,14 +429,14 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
                 key={selectedYear}
                 layout="vertical"
                 data={shapData}
-                margin={{ top: 0, right: 48, left: 0, bottom: 0 }}
-                barSize={32}
+                margin={{ top: 0, right: isMobile ? 36 : 48, left: 0, bottom: 0 }}
+                barSize={isMobile ? 22 : 32}
               >
                 <XAxis
                   type="number"
                   tickLine={false}
                   axisLine={false}
-                  tick={{ fontSize: 11, fill: '#6B6B6B' }}
+                  tick={{ fontSize: 10, fill: '#6B6B6B' }}
                 />
                 <YAxis
                   type="category"
@@ -416,8 +444,8 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
                   tickFormatter={(v) => displayNameForLang(String(v), lang)}
                   tickLine={false}
                   axisLine={false}
-                  tick={{ fontSize: 12, fill: '#1A1A1A' }}
-                  width={140}
+                  tick={{ fontSize: isMobile ? 10 : 12, fill: '#1A1A1A' }}
+                  width={isMobile ? 100 : 140}
                 />
                 <ReferenceLine x={0} stroke="#1A1A1A" strokeWidth={1} />
                 <Bar
@@ -461,7 +489,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
       )}
 
       {/* Sector story */}
-      <section className="grid grid-cols-3 gap-4 mb-10">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <div className="border-l-4 border-[#1A6B3C] pl-4 py-1">
           <p className="text-2xl font-bold text-[#1A1A1A] tabular-nums mb-1">
             +<CountUp target={11.6} suffix={unit} />
@@ -504,7 +532,8 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
             {t(lang, 'sectors.table.title')}
           </p>
           <p className="text-xs text-[#6B6B6B] mb-6">{t(lang, 'sectors.table.subtitle')}</p>
-          <table className="w-full text-sm border-collapse">
+          <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse min-w-[360px]">
             <thead>
               <tr className="border-b border-[#E5E5E5]">
                 {(['sectors.table.col.sector', 'sectors.table.col.meanShap', 'sectors.table.col.interpretation'] as const).map(col => (
@@ -537,6 +566,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
               })}
             </tbody>
           </table>
+          </div>
         </section>
       )}
     </div>
