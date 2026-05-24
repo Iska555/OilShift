@@ -3,10 +3,11 @@ import Footer from '@/components/Footer'
 import DivergenceContent from '@/components/DivergenceContent'
 import type { TableRow } from '@/components/DivergenceContent'
 import type { DivergenceRow } from '@/types/divergence'
+import { API_BASE } from '@/lib/api'
 
 async function getDivergenceSummary(): Promise<DivergenceRow[]> {
   try {
-    const res = await fetch('http://localhost:8000/api/divergence/summary', {
+    const res = await fetch(`${API_BASE}/api/divergence/summary`, {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return []

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { API_BASE } from '@/lib/api'
 import {
   BarChart,
   Bar,
@@ -135,7 +136,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
     if (debounceRef.current) clearTimeout(debounceRef.current)
     debounceRef.current = setTimeout(() => {
       setLoadingShap(true)
-      fetch(`http://localhost:8000/api/sectors/shap/${selectedYear}`)
+      fetch(`${API_BASE}/api/sectors/shap/${selectedYear}`)
         .then(r => (r.ok ? r.json() : []))
         .then((rows: ShapRow[]) =>
           setShapData([...rows].sort((a, b) => b.shap_value - a.shap_value))

@@ -2,10 +2,11 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import HomeContent from '@/components/HomeContent'
 import type { DivergenceRow } from '@/types/divergence'
+import { API_BASE } from '@/lib/api'
 
 async function getCrossoverYear(): Promise<string> {
   try {
-    const res = await fetch('http://localhost:8000/api/divergence/summary', {
+    const res = await fetch(`${API_BASE}/api/divergence/summary`, {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return '2033'
@@ -22,7 +23,7 @@ async function getCrossoverYear(): Promise<string> {
 
 async function getValidatedShocks(): Promise<string> {
   try {
-    const res = await fetch('http://localhost:8000/api/anomalies/validation', {
+    const res = await fetch(`${API_BASE}/api/anomalies/validation`, {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return '4 / 4'

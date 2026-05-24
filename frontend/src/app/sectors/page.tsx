@@ -1,6 +1,7 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import SectorsContent from '@/components/SectorsContent'
+import { API_BASE } from '@/lib/api'
 
 type ImportanceRow = {
   sector: string
@@ -20,7 +21,7 @@ type SectorSummaryRow = {
 
 async function getImportance(): Promise<ImportanceRow[]> {
   try {
-    const res = await fetch('http://localhost:8000/api/sectors/importance', {
+    const res = await fetch(`${API_BASE}/api/sectors/importance`, {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return []
@@ -32,7 +33,7 @@ async function getImportance(): Promise<ImportanceRow[]> {
 
 async function getSectorSummary(): Promise<SectorSummaryRow[]> {
   try {
-    const res = await fetch('http://localhost:8000/api/sectors/summary', {
+    const res = await fetch(`${API_BASE}/api/sectors/summary`, {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return []

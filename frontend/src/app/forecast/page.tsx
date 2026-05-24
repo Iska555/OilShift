@@ -1,6 +1,7 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ForecastContent from '@/components/ForecastContent'
+import { API_BASE } from '@/lib/api'
 
 type QuarterRow = {
   period: string
@@ -12,7 +13,7 @@ type QuarterRow = {
 
 async function getQuarterly(): Promise<QuarterRow[]> {
   try {
-    const res = await fetch('http://localhost:8000/api/forecast/quarterly', {
+    const res = await fetch(`${API_BASE}/api/forecast/quarterly`, {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return []

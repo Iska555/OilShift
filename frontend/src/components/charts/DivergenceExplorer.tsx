@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import { API_BASE } from '@/lib/api'
 import {
   LineChart,
   Line,
@@ -155,9 +156,9 @@ export default function DivergenceExplorer() {
     async function load() {
       try {
         const [bearRes, baseRes, bullRes] = await Promise.all([
-          fetch('http://localhost:8000/api/divergence/curves/bear_60'),
-          fetch('http://localhost:8000/api/divergence/curves/base_80'),
-          fetch('http://localhost:8000/api/divergence/curves/bull_100'),
+          fetch(`${API_BASE}/api/divergence/curves/bear_60`),
+          fetch(`${API_BASE}/api/divergence/curves/base_80`),
+          fetch(`${API_BASE}/api/divergence/curves/bull_100`),
         ])
         if (!bearRes.ok || !baseRes.ok || !bullRes.ok) throw new Error('fetch failed')
         const bear = (await bearRes.json()) as CurveData

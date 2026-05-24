@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { API_BASE } from '@/lib/api'
 import {
   LineChart,
   Line,
@@ -261,7 +262,7 @@ export default function AnomalyCardiogram() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/forecast/panel')
+    fetch(`${API_BASE}/api/forecast/panel`)
       .then(r => (r.ok ? r.json() : []))
       .then((rows: PanelRow[]) => setChartData(buildChartData(rows)))
       .catch(() => setChartData([]))
