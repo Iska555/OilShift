@@ -242,32 +242,32 @@ export default function MethodologyContent() {
             {[
               {
                 num: '01',
-                titleEn: 'Data-Driven Governance',
-                titleAz: 'Məlumat Əsaslı İdarəetmə',
-                en: "Priority Area 2 calls for production-grade AI pipelines on official state datasets. This platform treats stat.gov.az and opendata.az as first-class ML infrastructure — not supplementary sources.",
-                az: "2-ci Prioritet İstiqamət rəsmi dövlət məlumat bazaları üzərində istehsal səviyyəli süni intellekt boru kəmərləri yaratmağı nəzərdə tutur. Bu platforma stat.gov.az və opendata.az saytlarını köməkçi mənbələr kimi deyil, birinci dərəcəli ML infrastrukturu kimi qəbul edir.",
+                titleEn: 'DATA INFRASTRUCTURE (Priority 6.1.2)',
+                titleAz: 'MƏLUMAT İNFRASTRUKTURU (Prioritet 6.1.2)',
+                en: "Section 6.1.2 mandates development of national computing infrastructure and open state datasets for AI applications. This platform operationalizes that mandate: all model inputs are sourced exclusively from official state registries (stat.gov.az, World Bank Open Data), processed through a reproducible ML pipeline, and served via open API endpoints.",
+                az: "6.1.2-ci bənd süni intellekt tətbiqləri üçün milli hesablama infrastrukturunun və açıq dövlət məlumat toplusunun inkişafını nəzərdə tutur. Bu platforma həmin mandatı bilavasitə reallaşdırır: bütün model giriş məlumatlarını (inputları) yalnız rəsmi dövlət reyestrlərindən (stat.gov.az, Dünya Bankı Açıq Məlumatları) alır, təkrarlana bilən ML arxitekturası vasitəsilə emal edir və açıq API vasitəsilə təqdim edir.",
               },
               {
                 num: '02',
-                titleEn: 'AI in Economic Sectors',
-                titleAz: 'İqtisadi Sektorlarda Süni İntellekt',
-                en: "Priority Area 1 explicitly names economic competitiveness and non-oil diversification. The platform's headline question — when does oil GDP share fall below 20%? — is the exact KPI the strategy targets.",
-                az: "1-ci Prioritet İstiqamət iqtisadi rəqabətqabiliyyəti və qeyri-neft diversifikasiyasını açıq şəkildə qeyd edir. Platformanın əsas sualı — neft ÜDM payı nə vaxt 20%-dən aşağı düşür? — strategiyanın hədəflədiyi dəqiq KPI-dır.",
+                titleEn: 'AI IN PRIORITY SECTORS (Priority 6.1.4 / Action Plan 8.4.1)',
+                titleAz: 'PRİORİTET SEKTORLARDA SÜNİ İNTELLEKT (Prioritet 6.1.4 / Fəaliyyət Planı 8.4.1)',
+                en: "Action Plan Section 8.4.1 specifies pilot AI projects in priority economic sectors. This platform delivers that directly: XGBoost + SHAP attribution models identify which sectors — agriculture, services, trade, industry — are driving or suppressing GDP growth each year, providing decision-relevant intelligence for sector-level economic policy.",
+                az: "Fəaliyyət Planının 8.4.1-ci bəndi prioritet iqtisadi sektorlarda süni intellekt pilot layihələrinin icrasını tələb edir. Bu platforma həmin hədəfi birbaşa yerinə yetirir: XGBoost + SHAP atributsiya modelləri hər il ÜDM artımını hansı sektorların (kənd təsərrüfatı, xidmətlər, ticarət, sənaye) stimullaşdırdığını və ya ləngitdiyini müəyyən edərək, iqtisadi siyasət qərarlarının qəbulu üçün əsaslı analitik baza təqdim edir.",
               },
               {
                 num: '03',
-                titleEn: 'Pilot Project Mechanism',
-                titleAz: 'Pilot Layihə Mexanizmi',
-                en: "The Action Plan's pilot track specifies working AI systems applied to national data. This platform is exactly that: a deployed, live intelligence tool built on official Azerbaijani statistics.",
-                az: "Fəaliyyət Planının pilot treki milli məlumatlara tətbiq edilmiş fəaliyyətdə olan süni intellekt sistemlərini müəyyən edir. Bu platforma məhz budur: rəsmi Azərbaycan statistikası əsasında qurulmuş, yerləşdirilmiş, canlı analiz aləti.",
+                titleEn: 'RESEARCH & INNOVATION (Priority 6.1.3)',
+                titleAz: 'TƏDQİQAT VƏ İNNOVASİYA (Prioritet 6.1.3)',
+                en: "Section 6.1.3 targets development of local AI research capacity: 500 AI engineers by 2027, AI Academy establishment, and applied research output tied to national data. This platform is a prototype of that applied research output — reproducible, documented, and built entirely on Azerbaijani economic data rather than imported benchmarks.",
+                az: "6.1.3-cü bənd yerli süni intellekt tədqiqat potensialının inkişafını hədəfləyir: 2027-ci ilə qədər 500 süni intellekt mühəndisinin yetişdirilməsi, Süni İntellekt Akademiyasının yaradılması və milli məlumatlara əsaslanan tətbiqi tədqiqatlar. Bu platforma məhz belə tətbiqi tədqiqatların prototipidir — xarici şablonlara deyil, tamamilə Azərbaycanın makroiqtisadi statistikasına əsaslanaraq qurulmuş, şəffaf və təkrarlana bilən sistemdir.",
               },
               {
                 num: '04',
-                titleEn: 'Azerbaijan 2030',
-                titleAz: 'Azərbaycan 2030',
-                en: "The divergence model directly tracks Azerbaijan 2030's mandate to make the non-oil economy the center of development. Every projection is expressed at the 20%, 15%, and 10% IMF fiscal sustainability threshold levels as operationalized benchmarks.",
-                az: "Ayrışma modeli Azərbaycan 2030-un qeyri-neft iqtisadiyyatını inkişafın mərkəzinə çevirmək mandatını birbaşa izləyir. Hər bir proqnoz BVF-nin fiskal dayanıqlılıq hədd meyarlarına (20%, 15%, 10%) uyğun rəqəmsal göstəricilər kimi ifadə edilir.",
-              },
+                titleEn: 'AZERBAIJAN 2030',
+                titleAz: 'AZƏRBAYCAN 2030',
+                en: "Presidential Decree No. 2469 (2 February 2021) mandates making the non-oil economy the center of development. The divergence model directly tracks this mandate: every projection is expressed against IMF fiscal sustainability thresholds (20%, 15%, 10%) to operationalize when oil dependency reaches structurally critical levels under each price scenario.",
+                az: "2469 nömrəli Prezident Sərəncamı (2 fevral 2021-ci il) qeyri-neft iqtisadiyyatını inkişafın mərkəzinə çevirməyi prioritet elan edir. Divergensiya (struktur keçid) modeli bu mandatı birbaşa izləyir: hər bir proqnoz BVF-nin fiskal dayanıqlılıq hədlərinə (20%, 15%, 10%) istinadən ifadə edilir. Məqsəd, müxtəlif qiymət ssenariləri altında neftdən asılılığın struktur baxımından kritik səviyyəyə çatdığı anı kəmiyyətcə ölçmək və proqnozlaşdırmaqdır.",
+              }
             ].map((card) => (
               <div key={card.num} className="relative bg-white border border-[#E5E5E5] p-6 overflow-hidden">
                 <span className="absolute top-3 right-4 text-5xl font-thin text-[#E5E5E5] select-none leading-none">
@@ -305,7 +305,7 @@ export default function MethodologyContent() {
                   ['pandas / numpy', 'Data pipeline'],
                   ['scipy', 'Cubic spline interpolation'],
                   ['requests / BeautifulSoup', 'Scraping'],
-                  ['Render', 'Deployment'],
+                  ['Fly.io', 'Deployment'],
                 ].map(([pkg, role], i) => (
                   <tr key={i} className={`border-b border-[#F0F0F0] ${i % 2 === 1 ? 'bg-[#F8F8F6]' : ''}`}>
                     <td className="py-2 px-3 font-mono text-xs text-[#1A1A1A]">{pkg}</td>

@@ -1,0 +1,13 @@
+.git
+.vscode
+.claude
+frontend/
+frontend/node_modules
+venv
+src/
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+README.md
