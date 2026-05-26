@@ -72,10 +72,10 @@ Every output is framed in policy-relevant terms: crossover years expressed again
 
 | Strategy Priority | Platform Implementation |
 |-------------------|-------------------------|
-| **Priority Area 1 — Economic Competitiveness** | Headline KPI — oil GDP share below 20% — is the primary economic diversification target of Azerbaijan 2030. Every projection is expressed in the government's own policy-threshold terms. |
+| **Priority Area 1 — Economic Competitiveness** | The platform's headline KPI — oil GDP share crossing the 20% IMF fiscal independence threshold — directly operationalizes Azerbaijan 2030's mandate to make the non-oil economy the center of development. Every projection is expressed in IMF fiscal benchmark terms. |
 | **Priority Area 2 — Data-Driven Governance** | stat.gov.az, World Bank Open Data, and EIA are treated as first-class ML infrastructure. A fully automated scraping and preprocessing pipeline ingests official state statistics directly. |
 | **Pilot Project Mechanism** | A deployed, live intelligence tool built on official Azerbaijani state statistics — the exact deliverable the Action Plan's pilot track specifies. |
-| **Azerbaijan 2030 Alignment** | The divergence model directly tracks the primary KPI of Azerbaijan 2030's diversification mandate, expressed at the 20%, 15%, and 10% threshold levels. |
+| **Azerbaijan 2030 Alignment** | The divergence model tracks Azerbaijan 2030's mandate for non-oil economic centrality, using the 20%, 15%, and 10% IMF fiscal sustainability thresholds as operationalized benchmarks. |
 
 ---
 
@@ -130,7 +130,7 @@ where ε = oil-Brent elasticity, δ = structural production decline (fixed).
 | Base | $80 / bbl (sustained) | **2033** | 100% |
 | Bull | $100 / bbl (sustained) | Post-2045 | < 1% |
 
-**On the 20% threshold:** Below this level, Azerbaijan's sovereign fiscal position achieves structural independence from hydrocarbon revenue under IMF fiscal sustainability benchmarks — the explicit economic diversification target of the Azerbaijan 2030 strategy. The model also reports crossover years at the 25% and 15% thresholds.
+**On the 20% threshold:** Below this level, Azerbaijan's sovereign fiscal position achieves structural independence from hydrocarbon revenue under IMF fiscal sustainability benchmarks, operationalizing the Azerbaijan 2030 mandate to make the non-oil economy the center of development. The model also reports crossover years at the 25% and 15% thresholds.
 
 ---
 
@@ -289,7 +289,7 @@ The 2015 Manat devaluation — detected one year in advance via the Brent price 
 
 | Framework | Relevance to OilShift |
 |-----------|----------------------|
-| **Azerbaijan 2030: National Development Priorities** | Platform headline output — oil GDP share falling below 20% — is the primary quantitative KPI of the national diversification strategy. All projections are expressed at the 25%, 20%, and 15% threshold levels used in the strategy's own milestones. |
+| **Azerbaijan 2030: National Development Priorities** | Platform headline output — oil GDP share falling below 20% — directly tracks Azerbaijan 2030's mandate for non-oil economic development, using the 25%, 20%, and 15% IMF fiscal sustainability thresholds as operationalized benchmarks. |
 | **Presidential Decree on National AI Strategy 2025–2028** (19 March 2025) | Platform directly implements Priority Areas 1 (economic AI application) and 2 (data-driven governance on official state datasets), fulfilling the Action Plan's pilot project specification at production deployment level. |
 | **IMF Fiscal Sustainability Benchmarks** | The 20% oil GDP threshold is calibrated to the IMF's structural fiscal independence criterion for hydrocarbon-dependent sovereigns — the level at which Azerbaijan's budget becomes structurally independent of oil revenue volatility. |
 | **SOCAR Production Curve** | The structural decline parameter (−2.5%/yr) is modeled directly from SOCAR's post-peak historical output (2010–2024), making divergence projections grounded in observed field depletion rather than assumed price paths. |

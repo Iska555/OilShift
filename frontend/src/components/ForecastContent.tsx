@@ -79,12 +79,28 @@ export default function ForecastContent({ quarterlyData }: Props) {
       </section>
 
       {/* Explainer */}
-      <div className="mb-12">
+      <div className="mb-6">
         <SpecPanel
           label="WHY ARIMA WINS HERE + MODEL SPECIFICATION"
           labelAz="ARIMA NİYƏ ÜSTÜNDÜR + MODEL SPESİFİKASİYASI"
         >
           <p className="text-[#6B6B6B]">{t(lang, 'explainer.arimaWins.body')}</p>
+        </SpecPanel>
+      </div>
+      <div className="mb-6">
+        <SpecPanel
+          label="ARIMA MODEL EXPLANATION"
+          labelAz="ARIMA MODELİNİN İZAHI"
+        >
+          <p className="text-[#6B6B6B]">{t(lang, 'explainer.arima.body')}</p>
+        </SpecPanel>
+      </div>
+      <div className="mb-12">
+        <SpecPanel
+          label="LSTM MODEL EXPLANATION"
+          labelAz="LSTM MODELİNİN İZAHI"
+        >
+          <p className="text-[#6B6B6B]">{t(lang, 'explainer.lstm.body')}</p>
         </SpecPanel>
       </div>
     </main>

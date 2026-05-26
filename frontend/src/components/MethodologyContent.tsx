@@ -51,7 +51,7 @@ export default function MethodologyContent() {
           </h1>
           <p className="text-base text-[#6B6B6B] leading-relaxed">
             {az
-              ? 'Maşın öyrənməsi boru kəməri, məlumat mənbələri, model spesifikasiyaları və Azərbaycanın Milli Süni İntellekt Strategiyası 2025–2028 ilə uyğunluğunun tam texniki sənədləşdirilməsi.'
+              ? 'Machine Learning xəttinin (pipeline), məlumat mənbələrinin, model spesifikasiyalarının və layihənin "Azərbaycanın Milli Süni İntellekt Strategiyası 2025–2028" ilə uyğunluğunun tam texniki təsviri.'
               : "Full technical documentation of the machine learning pipeline, data sources, model specifications, and alignment with Azerbaijan's National AI Strategy 2025–2028."}
           </p>
         </div>
@@ -72,17 +72,17 @@ export default function MethodologyContent() {
             <span className="inline-block bg-[#1A1A1A] text-white text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
               {az ? 'ƏSAS TƏLİM MƏLUMATI' : 'PRIMARY TRAINING DATA'}
             </span>
-            <p className="text-base font-semibold text-[#1A1A1A]">State Statistics Committee</p>
+            <p className="text-base font-semibold text-[#1A1A1A]">{az ? 'Dövlət Statistika Komitəsi' : 'State Statistics Committee'}</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">stat.gov.az</p>
             <p className="text-sm text-[#6B6B6B] mt-3 leading-relaxed">
               {az
-                ? 'ÜDM (neft/qeyri-neft bölgüsü), sənaye istehsalı, pərakəndə ticarət dövriyyəsi, büdcə gəlirləri və strateji xarici ehtiyatları əks etdirən aylıq makroiqtisadi bülleten. HTTP vasitəsilə 10 tarixi snapshot toplanmışdır.'
+                ? 'ÜDM (neft/qeyri-neft bölgüsü), sənaye istehsalı, pərakəndə ticarət dövriyyəsi, büdcə gəlirləri və strateji valyuta ehtiyatlarını əhatə edən aylıq makroiqtisadi bülletenlər. 2025-ci ilin yanvarından 2026-cı ilin aprelinə qədər HTTP vasitəsilə toplanmış 10 tarixi "snapshot" (kəsik).'
                 : 'Monthly macroeconomic bulletins covering GDP (oil/non-oil split), industrial output, retail trade turnover, budget revenues, and strategic foreign reserves. 10 historical snapshots scraped via HTTP, January 2025 – April 2026.'}
             </p>
             <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex gap-6">
-              <span className="text-xs font-mono text-[#6B6B6B]">10 snapshots</span>
-              <span className="text-xs font-mono text-[#6B6B6B]">18 indicators</span>
-              <span className="text-xs font-mono text-[#6B6B6B]">HTML tables</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? '10 snapshot' : '10 snapshots'}</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? '18 indikator' : '18 indicators'}</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? 'HTML cədvəlləri' : 'HTML tables'}</span>
             </div>
           </div>
 
@@ -91,16 +91,16 @@ export default function MethodologyContent() {
             <span className="inline-block border border-[#1A1A1A] text-[#1A1A1A] text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
               {az ? 'DOĞRULAMA TƏBƏQƏSİ' : 'VALIDATION LAYER'}
             </span>
-            <p className="text-base font-semibold text-[#1A1A1A]">World Bank Open Data API</p>
+            <p className="text-base font-semibold text-[#1A1A1A]">{az ? 'Dünya Bankı Açıq Məlumat API-ı' : 'World Bank Open Data API'}</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">api.worldbank.org/v2/country/AZ</p>
             <p className="text-sm text-[#6B6B6B] mt-3 leading-relaxed">
               {az
-                ? '1990–2024-cü illər üzrə 9 illik makroiqtisadi göstərici. Uzunmüddətli meyl bütövlüyünü təsdiqləyən doğrulama təbəqəsi və kub spline interpolyasiyası vasitəsilə rüblük panel qurulması üçün mənbə kimi istifadə edilir.'
+                ? '1990–2024-cü illəri əhatə edən 9 makroiqtisadi indikator. Uzunmüddətli trayektoriyanın bütövlüyünü təsdiqləyən validasiya qatı və Cubic Spline interpolyasiyası vasitəsilə rüblük panelin qurulması üçün mənbə kimi istifadə olunur. API tələb olunmur.'
                 : '9 annual macroeconomic indicators spanning 1990–2024. Used as the validation layer confirming long-run trajectory integrity, and as the source for quarterly panel construction via cubic spline interpolation. No API key required.'}
             </p>
             <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex gap-6">
-              <span className="text-xs font-mono text-[#6B6B6B]">35 annual obs</span>
-              <span className="text-xs font-mono text-[#6B6B6B]">9 indicators</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? '35 illik müşahidə' : '35 annual obs'}</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? '9 indikator' : '9 indicators'}</span>
               <span className="text-xs font-mono text-[#6B6B6B]">REST JSON API</span>
             </div>
           </div>
@@ -110,15 +110,15 @@ export default function MethodologyContent() {
             <span className="inline-block border border-[#E5E5E5] text-[#6B6B6B] text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
               {az ? 'SSENARI DAXİLOLMALARI' : 'SCENARIO INPUTS'}
             </span>
-            <p className="text-base font-semibold text-[#1A1A1A]">U.S. Energy Information Admin.</p>
+            <p className="text-base font-semibold text-[#1A1A1A]">{az ? 'ABŞ Enerji İnformasiya Administrasiyası' : 'U.S. Energy Information Admin.'}</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">api.eia.gov/v2/petroleum</p>
             <p className="text-sm text-[#6B6B6B] mt-3 leading-relaxed">
               {az
-                ? '1987-ci ildən bu günədək aylıq Brent xam neft qiymətləri — 450+ müşahidə. Ayrışma simulyasiyasında əsas ekzogen sürücü. 60, 80 və 100$/barel üzrə üç irəli ssenari qurulmuşdur.'
+                ? '1987-ci ildən bu günə qədər aylıq Brent nefti spot qiymətləri — 450+ müşahidə. Divergensiya simulyasiyasında əsas hərəkətverici qüvvədir. $60, $80 və $100/barel qiymətlərində qurulmuş üç gələcək ssenari.'
                 : 'Monthly Brent crude spot prices from 1987 to present — 450+ observations. The primary exogenous driver in the divergence simulation. Three forward scenarios constructed at $60, $80, and $100/barrel.'}
             </p>
             <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex gap-6">
-              <span className="text-xs font-mono text-[#6B6B6B]">450+ monthly obs</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? '450+ aylıq müşahidə' : '450+ monthly obs'}</span>
               <span className="text-xs font-mono text-[#6B6B6B]">1987–2026</span>
               <span className="text-xs font-mono text-[#6B6B6B]">CSV + API</span>
             </div>
@@ -129,15 +129,15 @@ export default function MethodologyContent() {
             <span className="inline-block border border-[#E5E5E5] bg-[#F8F8F6] text-[#6B6B6B] text-[10px] uppercase tracking-widest px-2 py-0.5 mb-3">
               {az ? 'NÖVBƏTİ MƏRHƏLƏ' : 'NEXT PHASE'}
             </span>
-            <p className="text-base font-semibold text-[#1A1A1A]">Central Bank of Azerbaijan</p>
+            <p className="text-base font-semibold text-[#1A1A1A]">{az ? 'Azərbaycan Mərkəzi Bankı' : 'Central Bank of Azerbaijan'}</p>
             <p className="text-xs font-mono text-[#6B6B6B] mt-1">cbar.az/page-40/statistical-bulletin</p>
             <p className="text-sm text-[#6B6B6B] mt-3 leading-relaxed">
               {az
-                ? '2022–2026-cı illəri əhatə edən 43 aylıq XLSX bülleten yerli olaraq endirilmiş və keşlənmişdir. USD/AZN məzənnəsi, pul bazası, bank kreditləri və əmanətlər daxildir. LSTM təlim məlumatı kimi inteqrasiya növbəti inkişaf mərhələsidir.'
+                ? '2022–2026-cı illəri əhatə edən, yüklənmiş və lokal olaraq keşlənmiş 43 aylıq XLSX bülleteni. USD/AZN məzənnələrini, pul bazasını, bank kreditlərinin həcmini və depozitləri özündə cəmləşdirir. Pipeline qurulub və hazırdır — LSTM təlim məlumatları kimi inteqrasiyası növbəti inkişaf mərhələsidir.'
                 : '43 monthly XLSX bulletins downloaded and cached locally, covering 2022–2026. Contains USD/AZN exchange rates, monetary base, bank credit volumes, and deposits. Pipeline built and ready — integration as LSTM training data is the next development phase.'}
             </p>
             <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex gap-6">
-              <span className="text-xs font-mono text-[#6B6B6B]">43 bulletins</span>
+              <span className="text-xs font-mono text-[#6B6B6B]">{az ? '43 bülleten' : '43 bulletins'}</span>
               <span className="text-xs font-mono text-[#6B6B6B]">2022–2026</span>
               <span className="text-xs font-mono text-[#6B6B6B]">XLSX</span>
             </div>
@@ -265,8 +265,8 @@ export default function MethodologyContent() {
                 num: '04',
                 titleEn: 'Azerbaijan 2030',
                 titleAz: 'Azərbaycan 2030',
-                en: "The divergence model directly tracks Azerbaijan 2030's primary economic KPI. Every projection is expressed in policy-threshold terms (20%, 15%, 10%) matching the government's own diversification milestones.",
-                az: "Ayrışma modeli Azərbaycan 2030-un əsas iqtisadi KPI-sini birbaşa izləyir. Hər bir proqnoz hökumətin öz diversifikasiya mərhələlərinə uyğun siyasət hədd şərtlərində (20%, 15%, 10%) ifadə edilir.",
+                en: "The divergence model directly tracks Azerbaijan 2030's mandate to make the non-oil economy the center of development. Every projection is expressed at the 20%, 15%, and 10% IMF fiscal sustainability threshold levels as operationalized benchmarks.",
+                az: "Ayrışma modeli Azərbaycan 2030-un qeyri-neft iqtisadiyyatını inkişafın mərkəzinə çevirmək mandatını birbaşa izləyir. Hər bir proqnoz BVF-nin fiskal dayanıqlılıq hədd meyarlarına (20%, 15%, 10%) uyğun rəqəmsal göstəricilər kimi ifadə edilir.",
               },
             ].map((card) => (
               <div key={card.num} className="relative bg-white border border-[#E5E5E5] p-6 overflow-hidden">

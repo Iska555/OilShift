@@ -173,14 +173,27 @@ export interface Translations {
   'home.finding.stat3.label': string
   // Forecast chart — Fix 1
   'forecast.chart.title': string
+  // Forecast model explainers
+  'explainer.arima.body': string
+  'explainer.lstm.body': string
 }
 
 export type TranslationKey = keyof Translations
 
 export function interpolate(template: string, vars: Record<string, string>): string {
+  // AZ grammar fix: if year value already contains "sonra" (post-2045 case, e.g.
+  // "2045-dən sonra"), appending "-ci ilə qədər" produces broken output. Rewrite
+  // the full verb clause in the template before normal substitution runs.
+  let s = template
+  if (vars.year?.includes('sonra')) {
+    s = s.replace(
+      /\{year\}-ci ilə qədər 20%-dən aşağı düşür[\s\S]*/,
+      `${vars.year} 20%-dən aşağı düşmür — bu ssenaridə hədəf keçilmir.`
+    )
+  }
   return Object.entries(vars).reduce(
-    (s, [k, v]) => s.replace(new RegExp(`\\{${k}\\}`, 'g'), v),
-    template
+    (acc, [k, v]) => acc.replace(new RegExp(`\\{${k}\\}`, 'g'), v),
+    s
   )
 }
 
@@ -269,7 +282,7 @@ const en: Translations = {
   'explainer.shockValidation.title': 'RETROSPECTIVE SHOCK VALIDATION',
   'explainer.shockValidation.body': 'The PELT changepoint detection algorithm was applied to six macroeconomic series spanning 35 years. Without being given the dates, it identified structural breaks within a ±2 year window of all four major economic shocks: the 1994 post-Soviet stabilization, the 2008 global financial crisis, the 2015 Manat devaluation, and the 2020 COVID-19 collapse. This retrospective accuracy validates the methodology.',
   'explainer.readingChart.title': 'READING THIS CHART',
-  'explainer.readingChart.body': "The vertical axis shows oil's share of Azerbaijan's GDP as a percentage. The horizontal axis runs from 2025 to 2050. The dark solid line is the median projection (p50) — half of all 1,000 model simulations fall above it, half below. The dashed lines represent the 10th and 90th percentiles, forming an 80% confidence band. The horizontal reference line marks the 20% policy threshold defined in Azerbaijan's National AI Strategy 2025–2028 economic diversification targets.",
+  'explainer.readingChart.body': "The vertical axis shows oil's share of Azerbaijan's GDP as a percentage. The horizontal axis runs from 2025 to 2050. The dark solid line is the median projection (p50) — half of all 1,000 model simulations fall above it, half below. The dashed lines represent the 10th and 90th percentiles, forming an 80% confidence band. The horizontal reference line marks the 20% threshold derived from IMF fiscal sustainability benchmarks, operationalizing the Azerbaijan 2030 mandate to make the non-oil economy the center of development.",
   'explainer.modelCalibration.title': 'MODEL CALIBRATION',
   'explainer.modelCalibration.body': "The slider recalculates the crossover year based on a calibrated oil-price sensitivity coefficient of 0.256 — meaning a 10% change in Brent price corresponds to a 2.56% change in oil's GDP share. This elasticity was derived from OLS regression on 35 years of World Bank sectoral data. The structural production decline of −2.5%/year is modeled separately, reflecting SOCAR's post-peak depletion curve and is independent of price.",
   'explainer.whatIsThis': 'WHAT IS THIS?',
@@ -355,11 +368,13 @@ const en: Translations = {
   'home.finding.stat2.label': 'Model probability (1,000 paths)',
   'home.finding.stat3.label': 'Structural production decline',
   'forecast.chart.title': 'Quarterly GDP Index',
+  'explainer.arima.body': "ARIMA (Autoregressive Integrated Moving Average) is a standard econometric baseline model for time series forecasting, identifying linear dependencies and historical trends. It achieves highest accuracy when data is stationary and smooth. On this dataset — quarterly GDP derived from cubic spline interpolation of 35 annual World Bank observations — ARIMA produces a 0.15% MAPE, outperforming LSTM because the smooth interpolated series favors linear autoregressive structure.",
+  'explainer.lstm.body': "LSTM (Long Short-Term Memory) is a deep learning model capable of learning complex, non-linear patterns and long-range dependencies in time series data. It is applied where linear models fail — datasets containing abrupt structural breaks and high volatility. On smooth interpolated data, LSTM scores 5.38% MAPE. Its advantage will emerge when CBAR's 43 monthly bulletins (2022–2026) are incorporated as training data, replacing the interpolated quarterly approximation with real observed monthly values.",
 }
 
 const az: Translations = {
   'nav.overview': 'Ümumi İcmal',
-  'nav.divergence': 'Fərqlilik Təhlili',
+  'nav.divergence': 'Diversifikasiya Təhlili',
   'nav.forecast': 'Proqnozlaşdırma',
   'nav.anomalies': 'Anomaliyalar',
   'nav.sectors': 'Sektor Analizi',
@@ -369,7 +384,7 @@ const az: Translations = {
   'home.h1': 'Süni intellekt tərəfindən modelləşdirilmiş Azərbaycan Respublikasının neft sektorundan asılılığı',
   'home.h1.az.p1': 'Süni intellekt tərəfindən modelləşdirilmiş',
   'home.h1.az.p2': 'Azərbaycan Respublikasının neft sektorundan asılılığı',
-  'home.subtitle': 'Rəsmi statistik məlumatlara əsaslanan neft və qeyri-neft ÜDM-nin struktur keçidini əks etdirən maşın öyrənməsi təhlili — 2050-ci ilədək fərqlilik ssenarilərini proqnozlaşdırır.',
+  'home.subtitle': '2026-cı ilin yanvar-aprel dövrü üzrə rəsmi statistikaya əsaslanan və 2050-ci ilə qədər divergensiya ssenarilərini proqnozlaşdıran, Neftdən qeyri-neft ÜDM-ə struktur keçidinin Machine Learning əsasında təhlili.',
   'home.stat.oilShare': 'Cari Neft-Qaz ÜDM Payı',
   'home.stat.crossoverYear': 'Əsas Ssenari üzrə Keçid İli',
   'home.stat.shocksValidated': 'Modelin keçmiş iqtisadi sarsıntılarla uzlaşdırılması',
@@ -385,7 +400,7 @@ const az: Translations = {
 
   'divergence.pageLabel': 'FƏRQLƏNMƏ ANALİZİ',
   'divergence.title': 'Neft-Qaz ÜDM Payı Ssenariləri, 2025–2050',
-  'divergence.subtitle': 'Azərbaycanın neft-qaz sektorunun ÜDM-dəki payının üç Brent qiyməti ssenarisi üzrə 20% siyasi hədddən aşağı düşdüyü ili proqnozlaşdırır — əsas ssenariyə görə {year}-ci ildə 80$/barel sabit qiymətlə keçid baş verir.',
+  'divergence.subtitle': 'Üç müxtəlif Brent nefti qiyməti ehtimalı üzrə neftin ÜDM-dəki payının 20%-lik strateji həddin altına düşəcəyi ili hesablayır. Davamlı $80/barel qiymətinin tətbiq edildiyi baza ssenarisində bu keçid {year}-ci ilə təsadüf edir.',
   'divergence.metric.oilShareToday': 'Hazırda Neft-Qaz Payı',
   'divergence.metric.productionDecline': 'İstehsalın Struktur Azalması',
   'divergence.metric.baseCaseBelow20': 'Əsas Ssenaridə 20%-dən Aşağı Düşmə',
@@ -408,18 +423,18 @@ const az: Translations = {
   'divergence.table.col.oil20': 'Neft < 20%',
   'divergence.table.col.oil15': 'Neft < 15%',
   'divergence.table.col.probability': '20%-də Ehtimal',
-  'divergence.scenario.bear': 'Pessimist Ssenari',
+  'divergence.scenario.bear': 'Neqativ ssenari ($60/barel)',
   'divergence.scenario.base': 'Əsas Ssenari',
-  'divergence.scenario.bull': 'Optimist Ssenari',
+  'divergence.scenario.bull': 'Pozitiv ssenari ($100/barel)',
   'divergence.brent.bear': '60$/barel',
   'divergence.brent.base': '80$/barel',
   'divergence.brent.bull': '100$/barel',
   'divergence.table.caption': 'Ehtimal, 2050-ci ilə qədər neft-qaz ÜDM payının 20% həddini aşan 1.000 Monte Karlo yolunun nisbətini göstərir. Keçid illəri yalnız ehtimal 5%-dən çox olduqda göstərilir.',
   'divergence.methodology.title': 'Metodologiya + Model Spesifikasiyası',
-  'divergence.methodology.p1': 'Ssenarilər, hər Brent qiyməti fərziyyəsi üçün 1.000 yolla Monte Karlo simulyasiyası vasitəsilə yaradılmışdır. Hər yol, 2026-cı il faktiki göstəricilərdən çıxış nöqtəsi kimi istifadə edərək neft istehsalının azalması və qeyri-neft sektorunun artımı üçün kalibrə edilmiş stoxastik prosesdən götürülür.',
-  'divergence.methodology.p2': 'Neft-Brent elastikliyi (0,256) Dünya Bankı və Dövlət Statistika Komitəsinin 1990–2024-cü illər məlumatlarına əsaslanan adi ən kiçik kvadratlar reqressiyası ilə qiymətləndirilmişdir. Struktur istehsal azalması (−2,5%/il) SOCAR-ın zirvə sonrası (2010–2024) dövrünün tarixi çıxış meyllərini əks etdirir.',
-  'divergence.methodology.p3': 'Qeyri-neft sektoru artımı, Milli İqtisadiyyat Proqramı (2019–2025) hədəflərinə və faktiki nəticələrə uyğunlaşdırılmış orta-geri dönən bir prosesdən istifadə etməklə modelləşdirilmişdir. 20% həddi, Beynəlxalq Valyuta Fondunun fiskal dayanıqlılıq meyarlarına görə Azərbaycanın suveren fiskal mövqeyinin karbohidrogen gəlirindən struktur müstəqillik qazandığı həddə uyğun gəlir.',
-  'divergence.methodology.combined': 'Ssenarilər, hər Brent qiyməti fərziyyəsi üçün 1.000 yolla Monte Karlo simulyasiyası vasitəsilə yaradılmışdır. Neft-Brent elastikliyi (0,256) Dünya Bankı və Dövlət Statistika Komitəsinin 1990–2024-cü illər məlumatlarına əsaslanan adi ən kiçik kvadratlar reqressiyası ilə qiymətləndirilmişdir. Struktur istehsal azalması (−2,5%/il) SOCAR-ın zirvə sonrası (2010–2024) dövrünün tarixi çıxış meyllərini əks etdirir. Qeyri-neft sektoru artımı Milli İqtisadiyyat Proqramı (2019–2025) hədəflərinə uyğunlaşdırılmışdır. 20% həddi, Beynəlxalq Valyuta Fondunun fiskal dayanıqlılıq meyarlarına görə Azərbaycanın suveren fiskal mövqeyinin karbohidrogen gəlirindən müstəqillik qazandığı həddə uyğun gəlir.',
+  'divergence.methodology.p1': 'Ssenarilər hər Brent qiyməti fərziyyəsinə uyğun 1000 trayektoriyalı Monte Carlo simulyasiyası vasitəsilə yaradılır. Hər bir trayektoriya 2026-cı ilin faktiki məlumatlarına əsaslanan, neft hasilatının azalması və qeyri-neft sektorunun böyüməsi üçün kalibrlənmiş stoxastik prosesdən irəli gəlir.',
+  'divergence.methodology.p2': 'Neft-Brent elastikliyi (0,256) Dünya Bankı və Dövlət Statistika Komitəsinin 1990–2024-cü illər üzrə məlumatları əsasında OLS reqressiyası ilə qiymətləndirilmişdir. Struktur hasilat azalması (illik −2,5%) SOCAR-ın pik dövrdən sonrakı (2010–2024) tarixi göstəricilərini əks etdirir.',
+  'divergence.methodology.p3': 'Qeyri-neft sektorunun inkişafı isə Milli İqtisadiyyat üzrə Dövlət Proqramının hədəflərinə (2019–2025) və real nəticələrə uyğunlaşdırılmış "mean-reverting" (ortalamaya qayıdış) prosesini izləyir. 20%-lik hədd, BVF-nin (BVF = IMF) fiskal dayanıqlılıq meyarlarına görə Azərbaycanın suveren fiskal mövqeyinin karbohidrogen gəlirlərindən struktur olaraq müstəqil olduğu səviyyəni göstərir.',
+  'divergence.methodology.combined': 'Ssenarilər hər Brent qiyməti fərziyyəsinə uyğun 1000 trayektoriyalı Monte Carlo simulyasiyası vasitəsilə yaradılır. Hər bir trayektoriya 2026-cı ilin faktiki məlumatlarına əsaslanan, neft hasilatının azalması və qeyri-neft sektorunun böyüməsi üçün kalibrlənmiş stoxastik prosesdən irəli gəlir. Neft-Brent elastikliyi (0,256) Dünya Bankı və Dövlət Statistika Komitəsinin 1990–2024-cü illər üzrə məlumatları əsasında OLS reqressiyası ilə qiymətləndirilmişdir. Struktur hasilat azalması (illik −2,5%) SOCAR-ın pik dövrdən sonrakı (2010–2024) tarixi göstəricilərini əks etdirir. Qeyri-neft sektorunun inkişafı isə Milli İqtisadiyyat üzrə Dövlət Proqramının hədəflərinə (2019–2025) və real nəticələrə uyğunlaşdırılmış "mean-reverting" (ortalamaya qayıdış) prosesini izləyir. 20%-lik hədd, BVF-nin (BVF = IMF) fiskal dayanıqlılıq meyarlarına görə Azərbaycanın suveren fiskal mövqeyinin karbohidrogen gəlirlərindən struktur olaraq müstəqil olduğu səviyyəni göstərir.',
 
   'slider.fallsBelow20': 'Neft payı 20%-dən aşağı düşür:',
   'slider.perBarrel': 'hər barrel üçün',
@@ -436,15 +451,15 @@ const az: Translations = {
 
   'explainer.triggerLabel': 'ℹ Məlumat',
   'explainer.oilGdpShare.title': 'NEFT-QAZ ÜDM PAYI NƏDİR?',
-  'explainer.oilGdpShare.body': "Bu rəqəm Azərbaycanın ümumi iqtisadi çıxışının birbaşa neft-qaz hasilatı və emalına aid olan hissəsini göstərir. 30,4% ilə iqtisadi fəaliyyətin təxminən üçdə biri karbohidrogen gəlirindən asılıdır — bu, hökumətin Azərbaycan 2030 Strategiyasının yetişmiş yataqların təbii tükəndiyi bir dövrdə azaltmağa hədəf qoyduğu struktur asılılıqdır.",
+  'explainer.oilGdpShare.body': 'Bu göstərici Azərbaycanın ümumi iqtisadi istehsalında birbaşa neft və qazın hasilatı və emalı ilə bağlı olan payını ifadə edir. Ümumi iqtisadi fəaliyyətin təxminən üçdə biri (30,4%) karbohidrogen gəlirlərindən asılı olması struktur asılılığı yaradır. Yetkin yataqlarda hasilatın təbii yolla azalması fonunda, "Azərbaycan 2030" strategiyası məhz bu asılılığın azaldılmasını hədəfləyir.',
   'explainer.crossoverYear.title': 'KEÇİD İLİ NECƏ HESABLANIR?',
-  'explainer.crossoverYear.body': '1.000 stoxastik yoldan ibarət Monte Karlo simulyasiyasından istifadə edərək, model Azərbaycanın neft-qaz sektorunun ÜDM-dəki payını 2026-cı il bazis nöqtəsindən irəliyə proyeksiya edir. 2033-cü il rəqəmi, 1990–2024-cü illər üzrə tarixi qiymət həssaslığına uyğunlaşdırılmış sabit 80$/barel Brent qiyməti baza ssenarisi çərçivəsində neft payının 20% siyasi həddindən aşağı düşdüyü median ili ifadə edir.',
-  'explainer.shockValidation.title': 'GERİYƏ DÖNÜK SARSINTI DOĞRULAMASI',
-  'explainer.shockValidation.body': 'PELT dəyişkən nöqtə aşkarlama alqoritmi 35 il əhatə edən altı makroiqtisadi seriyanın üzərindən keçirildi. Tarixlər verilmədən, alqoritm dörd əsas iqtisadi sarsıntının hamısını ±2 il hüdudunda müəyyən etdi: 1994-cü ilin Sovet sonrası sabitləşməsi, 2008-ci ilin qlobal maliyyə böhranı, 2015-ci ilin Manat devalvasiyası və 2020-ci ilin COVID-19 çöküşü. Bu geriyə dönük dəqiqlik metodologiyanı təsdiqləyir.',
-  'explainer.readingChart.title': 'CƏDVƏLİ NECƏ OXUMALI',
-  'explainer.readingChart.body': 'Şaquli ox Azərbaycanın ÜDM-indəki neft-qaz payını faizlə göstərir. Üfüqi ox 2025-ci ildən 2050-ci ilə qədər uzanır. Tünd bərk xətt median proyeksiyadır (p50) — 1.000 model simulyasiyasının yarısı ondan yüksək, yarısı aşağıdır. Kesik xətlər 10-cu və 90-cı persentilləri təmsil edir və 80% etibar bandını təşkil edir. Üfüqi istinad xətti Azərbaycanın Milli Süni İntellekt Strategiyası 2025–2028-in iqtisadi diversifikasiya hədəflərində müəyyən edilmiş 20% siyasi həddini işarəlyir.',
-  'explainer.modelCalibration.title': 'MODELİN KALİBRASİYASI',
-  'explainer.modelCalibration.body': 'Sürüşdürücü, kalibrə edilmiş 0,256 neft qiyməti həssaslıq əmsalı əsasında keçid ilini yenidən hesablayır — Brent qiymətindəki 10%-lik dəyişiklik neftin ÜDM payında 2,56%-lik dəyişikliyə uyğun gəlir. Bu elastiklik 35 illik Dünya Bankı sektor məlumatlarında adi ən kiçik kvadratlar reqressiyasından əldə edilmişdir. −2,5%/il struktur istehsal azalması ayrıca modelləşdirilmişdir, SOCAR-ın zirvə sonrası tükənmə əyrisini əks etdirir və qiymətdən asılı deyil.',
+  'explainer.crossoverYear.body': 'Model 1000 ehtimal yolunu özündə birləşdirən Monte Carlo simulyasiyası vasitəsilə 2026-cı il baza xəttinə əsasən neftin ÜDM-dəki payını proqnozlaşdırır. 2033-cü il, Brent neftinin davamlı olaraq $80/barel qiymətində qaldığı və neft payının 20%-lik strateji hədəf həddindən aşağı düşdüyü median ilini təmsil edir. Bu, 1990–2024-cü illər üzrə Dünya Bankının məlumatlarından alınan tarixi qiymət həssaslığına uyğunlaşdırılmış baza ssenarisidir.',
+  'explainer.shockValidation.title': 'RETROSPEKTİV SARSINTILARIN VALİDASİYASI',
+  'explainer.shockValidation.body': 'PELT dəyişiklik nöqtəsinin (changepoint) aşkarlanması alqoritmi 35 ili əhatə edən altı makroiqtisadi seriyaya tətbiq edilmişdir. Sistemə tarixi məlumatlar verilməməsinə baxmayaraq, model dörd böyük struktur şokunu (1994 post-sovet sabitləşməsi, 2008 qlobal maliyyə böhranı, 2015 manat devalvasiyası və 2020 pandemiya böhranı) ±2 il aralığında tam dəqiqliklə müəyyən etmişdir.  Bu retrospektiv dəqiqlik seçilmiş metodologiyanın etibarlılığını təsdiq edir.',
+  'explainer.readingChart.title': 'QRAFİKİN İZAHLI OXUNUŞU',
+  'explainer.readingChart.body': 'Şaquli ox neftin Azərbaycanın ÜDM-dəki payını faizlə, üfüqi ox isə 2025-ci ildən 2050-ci ilə qədər olan dövrü göstərir. Tünd bütöv xətt median ehtimaldır (p50) — modelin 1000 simulyasiyasının yarısı bu xəttin üstündə, yarısı isə altında yerləşir. Qırıq xətlər 80%-lik etibarlılıq intervalını formalaşdıran 10-cu və 90-cı persentilləri təmsil edir. Üfüqi istinad xətti isə BVF-nin fiskal dayanıqlılıq meyarlarından alınan 20%-lik həddi işarələyir — bu, Azərbaycan 2030-un qeyri-neft iqtisadiyyatını inkişafın mərkəzinə çevirmək mandatını rəqəmsal göstəriciyə çevirir.',
+  'explainer.modelCalibration.title': 'MODELİN PARAMETRLƏŞDİRİLMƏSİ',
+  'explainer.modelCalibration.body': 'Slayder neft qiymətinə həssaslıq əmsalını (0,256) əsas götürərək keçid ilini dinamik hesablayır; Brent neftinin qiymətindəki hər 10% dəyişim neftin ÜDM-dəki payında 2,56% dəyişikliklə nəticələnir. Bu göstərici Dünya Bankının 35 illik statistikası əsasında OLS reqressiyasından alınmışdır. İllik −2,5% olan struktur hasilat azalması SOCAR-ın hasilat dinamikasını ifadə edir və qiymət faktorundan tamamilə müstəqil şəkildə modelləşdirilib.',
   'explainer.whatIsThis': 'BU NƏDİR?',
   'explainer.methodologyNote': 'METODOLOJİ QEYD',
 
@@ -455,21 +470,21 @@ const az: Translations = {
   'anomaly.eyebrow': 'ANOMALİYA AŞKARLAMA',
   'anomaly.title': 'Struktur Dəyişiklik Təhlili, 1990–2024',
   'anomaly.subtitle': 'PELT dəyişiklik nöqtəsi aşkarlaması altı makroiqtisadi sıraya tətbiq edilmişdir. Dörd məlum sarsıntı əvvəlcədən tarix bilinmədən retrospektiv olaraq təsdiqlənmişdir.',
-  'anomaly.badge': '4 / 4 Təsdiqləndi',
+  'anomaly.badge': '4 / 4 Sarsıntı Təsdiqi',
   'anomaly.metric.shocks.label': 'Təsdiqlənmiş Sarsıntılar',
   'anomaly.metric.recentBreak.label': 'Ən Son Dəyişiklik',
-  'anomaly.metric.series2004.label': '2004 Fasiləsindəki Sıra Sayı',
-  'anomaly.metric.tolerance.label': 'Aşkarlama Tolerantlığı',
+  'anomaly.metric.series2004.label': '2004-cü il qırılmasından təsirlənən 5 seriya',
+  'anomaly.metric.tolerance.label': 'Identifikasiya aralığı',
   'explainer.anomalyMethod.title': 'ANOMALİYA AŞKARLAMASI NECƏ İŞLƏYİR?',
-  'explainer.anomalyMethod.body': 'PELT alqoritmi hər bir makroiqtisadi göstəricini statistik xassələrin — orta dəyər, dispersiya və ya meyil — kəskin şəkildə dəyişdiyi nöqtələr üçün ardıcıl olaraq analiz edir. Alqoritm sarsıntıların tarixini əvvəlcədən bilmir. Məlum hadisədən ±2 il ərzində aşkarlanan fasilə \'təsdiqlənmiş\' hesab edilir. 2004-cü ildə beş göstəricini eyni anda əhatə edən fasilə ACG neft layihəsinin başlanğıcını — Azərbaycanın müstəqillik dövrü iqtisadi tarixinin ən mühüm struktur çevrilişini — əks etdirir.',
+  'explainer.anomalyMethod.body': 'PELT (Pruned Exact Linear Time) alqoritmi hər bir makroiqtisadi sıranı statistik xüsusiyyətlərin — orta, dispersiya və ya trend — kəskin şəkildə dəyişdiyi nöqtələr üçün skan edir. Alqoritm sarsıntıların nə vaxt baş verdiyini əvvəlcədən bilmir. Məlum hadisədən ±2 il ərzində aşkarlanan fasilə təsdiqlənmiş sayılır. 2004-cü ildə 5 sıranı eyni anda əhatə edən fasilə ACG neft yüksəlişini — Azərbaycanın müstəqillik sonrası iqtisadi tarixinin ən əhəmiyyətli struktur hadisəsini — qeyd edir.',
   'anomaly.case.1994.title': 'Sovet İttifaqı Sonrası İqtisadi Böhran',
-  'anomaly.case.1994.text': 'Mərkəzləşdirilmiş iqtisadi sistemin süqutu nəticəsində ÜDM 21% gerilədi. Model bu fasiləni ÜDM artımı və istehlak qiymətləri indeksini eyni anda analiz edərək aşkar etdi.',
+  'anomaly.case.1994.text': 'Planlı iqtisadiyyatın çökməsi ilə ÜDM 21% daraldı. Struktur qırılması ÜDM artımı və İstehlak Qiymətləri İndeksində (İQİ) eyni vaxtda müşahidə olunur.',
   'anomaly.case.2008.title': 'Qlobal Maliyyə Böhranı',
-  'anomaly.case.2008.text': 'Neft qiymətləri altı ay ərzində 145$/bareldən 35$/barelə kəskin düşdü. ÜDM artımı sürətlə azaldı. Dominant struktur fasiləsi Brent qiymət sırasında müşahidə edildi.',
+  'anomaly.case.2008.text': 'Neft qiymətləri altı ay ərzində $145-dan $35/barelə çökdü. ÜDM artımı kəskin şəkildə yavaşladı. Brent seriyası dominant struktur qırılmasını aydın göstərir.',
   'anomaly.case.2015.title': 'Azərbaycan Manatının Devalvasiyası',
-  'anomaly.case.2015.text': 'Azərbaycan Manatı iki mərhələdə ABŞ dollarına nisbətən dəyərinin 50%-ni itirdi. Model bu hadisəni Brent qiymət sırası vasitəsilə bir il əvvəl — 2014-cü ildə — qabaqcadan aşkar etdi. Bu, modelin proqnostik qabiliyyətini təsdiqləyir.',
+  'anomaly.case.2015.text': 'Azərbaycan manatı iki mərhələdə ABŞ dollarına qarşı dəyərinin ~50%-ni itirdi. Brent qiymət seriyası vasitəsilə bir il əvvəl (2014) aşkarlanması, bu metodun aparıcı indikator potensialını sübut edir.',
   'anomaly.case.2020.title': 'COVID-19 Pandemiyası və Neft Şoku',
-  'anomaly.case.2020.text': 'Pandemiyanın təsiri ilə eyni vaxtda neft qiymətləri 20$/barelə qədər düşdü. Brent sırası 2020-ci ilə aid dəqiq fasiləni qeyd etdi — modelin bütün sarsıntılar arasında ən dəqiq aşkarlaması.',
+  'anomaly.case.2020.text': 'Pandemiya şoku və neftin qiymətinin $20/barelə düşməsi eyni anda baş verdi. Brent seriyası struktur dəyişikliyini tam olaraq 2020-ci ildə qeydə alır — bu, modelin ən dəqiq identifikasiyasıdır.',
   'anomaly.chart.title': 'MAKRO-ŞOKS KARDİOQRAMI',
 
   // Sectors page
@@ -480,7 +495,7 @@ const az: Translations = {
   'sectors.metric.peakContrib.value': 'İstehlak Xidmətləri',
   'sectors.metric.peakContrib.label': '2005–2008 Pik Töhfəçi',
   'sectors.metric.drag.value': 'Əmək Bazarı',
-  'sectors.metric.drag.label': '2010–2019 Dominant Maneə',
+  'sectors.metric.drag.label': '2010–2019  İqtisadiyyatı Ləngidən Ən Böyük Amil',
   'sectors.metric.count.label': 'Modelləşdirilmiş Sektor',
   'explainer.shap.title': 'SHAP DƏYƏRLƏRİ NƏDİR?',
   'explainer.shap.body': 'SHAP dəyərləri hər sektorun ÜDM artımı proqnozuna marjinal töhfəsini ölçür. Müsbət SHAP dəyəri sektorun artımı baza xəttindən yuxarı itələdiyini bildirir; mənfi isə onu yavaşlatdığını. Dəyərlər additiv xarakter daşıyır — həmin ilin ümumi proqnozlaşdırılmış artım sürətinə cəmlənir.',
@@ -493,19 +508,19 @@ const az: Translations = {
 
   // Forecast page
   'forecast.title': 'ÜDM Artım Proqnozu, 1991–2024',
-  'forecast.subtitle': 'LSTM dərin öyrənmə modeli ARIMA ekonometrik baza modeli ilə müqayisədə. 28 rüb üzrə xaricdən-nümunə testi.',
+  'forecast.subtitle': 'LSTM dərin öyrənmə modeli ARIMA ekonometrik baza modeli ilə müqayisədə. 28 rüb üzrə nümunə testi.',
   'forecast.metric.arimaMape.label': 'ARIMA Test MAPE',
   'forecast.metric.lstmMape.label': 'LSTM Test MAPE',
   'forecast.metric.testQuarters.label': 'Test Rübləri',
   'forecast.metric.totalObs.label': 'Ümumi Müşahidə',
-  'forecast.banner': 'Bu verilənlər üzərində ARIMA LSTM-i üstələyir. Bu gözləniləndir: rüblük sıra 35 illik Dünya Bankı müşahidəsinin kub spline interpolyasiyasından əldə edilmişdir. LSTM-in üstünlüyü CBAR aylıq sıraları daxil edildikdə üzə çıxacaq.',
+  'forecast.banner': 'Cari verilənlər bazasında ARIMA modeli LSTM-i üstələyir. Bu, gözlənilən nəticədir: rüblük sıralar Dünya Bankının 35 illik göstəricilərinin kubik splayn interpolyasiyası ilə hesablandığı üçün xətti modellərə üstünlük verən hamar bir trend əmələ gətirir. LSTM-in real üstünlüyü Mərkəzi Bankın (AMB) aylıq hesabatları (43 bülleten) təlim məlumatlarına əlavə edildikdən sonra üzə çıxacaq.',
   'forecast.toggle.full': 'Tam Tarix',
   'forecast.toggle.test': 'Yalnız Test Dövrü',
   'explainer.arimaWins.title': 'NIYƏ ARIMA BURADA QALIB GƏLİR?',
   'explainer.arimaWins.body': 'ARIMA hamar, trend izləyən sıralarda üstündür — interpolyasiya edilmiş rüblük ÜDM indeksi məhz belədir. LSTM şəbəkələri xətti modellərin öyrənə bilmədiyi nümunələri aşkar etmək üçün kifayət qədər qeyri-xətti dəyişkənlik tələb edir. İllik məlumatların kub spline ilə rüblüyə çevrilməsində belə dəyişkənlik yoxdur. Bu metodoloji cəhətdən dürüst nəticədir, uğursuzluq deyil.',
   'forecast.legend.actual': 'Faktiki',
-  'forecast.callout.arima': 'Test dövründə MAPE. ARIMA hamar interpolyasiya edilmiş məlumatda qalib gəlir — xətti avtokorrelyasiya üstünlük təşkil edir.',
-  'forecast.callout.lstm': 'Test dövründə MAPE. Kub spline məlumatında gözlənilən nəticə; LSTM-in üstünlüyü CBAR aylıq seriyaları ilə üzə çıxacaq.',
+  'forecast.callout.arima': 'Sınaq dövrü üzrə MAPE. Hamar interpolyasiya edilmiş məlumatlarda ARIMA qalib gəlir — xətti avtokorrelyasiya üstünlük təşkil edir.',
+  'forecast.callout.lstm': 'Sınaq dövrü üzrə MAPE. Kubik splayn məlumatları üçün gözləniləndir; LSTM-in üstünlüyü AMB-nin aylıq məlumatları ilə üzə çıxacaq.',
   'sectors.callout.topDriver': 'Əsas Artım Amili',
   'sectors.callout.topDrag': 'İqtisadiyyatı Ləngidən Ən Böyük Amil',
   'sectors.callout.dominantSector': 'Tarixi Lider Sektor',
@@ -519,15 +534,17 @@ const az: Translations = {
   'sectors.story.agriculture.title': 'KƏND TƏSƏRRÜFATININ DOMINANT DÖVRÜ',
   'sectors.story.agriculture.text': 'Kənd təsərrüfatı ardıcıl 11 il ərzində əsas artım sürücüsü olaraq qeyri-neft sabitliyini möhkəmləndirdi.',
   'sectors.story.labor.title': 'ƏMƏK BAZARININ ƏN AŞAĞI GÖSTƏRİCİSİ',
-  'sectors.story.labor.text': '2016-cı ildə əmək bazarının pik əyləci — devalvasiya sonrası struktural işsizlik ÜDM artımını zəiflətdi.',
+  'sectors.story.labor.text': 'Əmək bazarında pik geriləmə (2016) — devalvasiyadan sonrakı uyğunlaşma dövründə struktur işsizlik ÜDM artımını yavaşlatdı.',
   'sectors.pp': 'f.b.',
-  'sectors.ppNote': 'f.b. = faiz bəndi — bu sektorun ÜDM artım sürətinə aid mütləq dəyişiklik. +1 f.b. həmin sektorun həmin ilin ÜDM artımına 1 faiz bəndi əlavə etdiyini bildirir.',
+  'sectors.ppNote': 'f.b. = faiz bəndi. +1 f.b. SHAP dəyəri, müvafiq sektorun həmin il ÜDM artımına modelin baza xəttindən əlavə 1 faiz bəndi töhfə verdiyini bildirir.',
   'home.finding.headline': 'PLATFORMANIN ƏSAS KƏŞFİ',
   'home.finding.pullquote': 'Davamlı olaraq barrel başına 80 ABŞ dolları sabit neft qiyməti fonunda 2033-cü ilə qədər Azərbaycanın ÜDM-də neftin payı hədəflənən 20%-lik limitdən aşağı həddə enəcəyi gözlənilir. Buna səbəb neft yataqlarının illik −2.5% həcmində struktur aşınması (tükənməsi) və qeyri-neft sektorundakı 4.5%-lik artımdır.',
-  'home.finding.stat1.label': 'Əsas ssenaridə hədd keçidi',
+  'home.finding.stat1.label': 'Baza ssenarisində hədəf xəttinin keçilməsi',
   'home.finding.stat2.label': 'Model ehtimalı (1.000 yol)',
   'home.finding.stat3.label': 'Struktur istehsal azalması',
   'forecast.chart.title': 'Rüblük ÜDM İndeksi',
+  'explainer.arima.body': "ARIMA (Avtoreqressiv İnteqrə Olunmuş Hərəkətli Ortalama) zaman sıralarının proqnozlaşdırılması üçün istifadə olunan, xətti asılılıqları və tarixi trendləri müəyyən edən standart ekonometrik baza modelidir. Bu model, məlumatlar sabit və hamar (smooth) xarakter daşıdıqda ən yüksək dəqiqliyi təmin edir. Cari verilənlər bazasında — Dünya Bankının 35 illik göstəricilərinin kubik splayn interpolyasiyasından alınan rüblük ÜDM — ARIMA 0,15% MAPE göstəricisi ilə LSTM-i üstələyir, çünki hamar interpolyasiya edilmiş sıra xətti avtoreqressiv struktura üstünlük verir.",
+  'explainer.lstm.body': "LSTM (Uzun Qısamüddətli Yaddaş) zaman sıralarındakı mürəkkəb, qeyri-xətti qanunauyğunluqları və uzunmüddətli asılılıqları öyrənməyə qadir olan dərin öyrənmə (deep learning) modelidir. Xətti modellərin qavraya bilmədiyi, qəfil sarsıntılar və dəyişkənliklər ehtiva edən datalarda tətbiq olunur. Hamar interpolyasiya edilmiş məlumatlarda LSTM 5,38% MAPE göstəricisi əldə edir. Onun üstünlüyü Mərkəzi Bankın 43 aylıq bülleteni (2022–2026) təlim məlumatlarına əlavə edildikdən sonra, interpolyasiya edilmiş rüblük təxminini real aylıq müşahidələrlə əvəz etdikdə üzə çıxacaq.",
 }
 
 export const dict: Record<Lang, Translations> = { en, az }

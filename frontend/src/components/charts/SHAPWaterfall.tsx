@@ -40,8 +40,21 @@ const SECTOR_DISPLAY_AZ: Record<string, string> = {
   brent_annual_avg_usd: 'Neft Qiyməti',
 }
 
+// Fallback for summary-endpoint responses that return EN display names
+// instead of internal feature keys (e.g. "Agriculture" vs "agriculture_va_pct_gdp")
+const SECTOR_EN_TO_AZ: Record<string, string> = {
+  'Industry': 'Sənaye',
+  'Labor Market': 'Əmək Bazarı',
+  'Agriculture': 'Kənd Təsərrüfatı',
+  'Services': 'Xidmətlər',
+  'Trade': 'Ticarət',
+  'Investment': 'İnvestisiya',
+  'Consumer Services': 'İstehlak Xidmətləri',
+  'Oil Price': 'Neft Qiyməti',
+}
+
 function displayNameForLang(s: string, lang: Lang): string {
-  if (lang === 'az') return SECTOR_DISPLAY_AZ[s] ?? SECTOR_DISPLAY[s] ?? s
+  if (lang === 'az') return SECTOR_DISPLAY_AZ[s] ?? SECTOR_EN_TO_AZ[s] ?? SECTOR_DISPLAY[s] ?? s
   return SECTOR_DISPLAY[s] ?? s
 }
 
@@ -56,13 +69,13 @@ const INTERPRETATIONS_EN: Record<string, string> = {
 }
 
 const INTERPRETATIONS_AZ: Record<string, string> = {
-  agriculture_va_pct_gdp: 'Davamlı qeyri-neft sabitləşdiricisi',
-  services_va_pct_gdp: 'Neft bumu gücləndiricisi, 2005–2008',
-  unemployment_rate: 'Struktur məşğulluq maneəsi',
-  industry_va_pct_gdp: 'Bum sonrası orta dəyərə qayıdış',
-  gross_capital_formation_pct: 'Dövri, aşağı ortalama təsir',
-  trade_pct_gdp: 'Kiçik, sabit töhfə',
-  brent_annual_avg_usd: 'Xarici şok ötürücüsü',
+  agriculture_va_pct_gdp: 'Davamlı qeyri-neft stabilizatoru',
+  services_va_pct_gdp: '2005–2008 neft yüksəliş katalizatoru',
+  unemployment_rate: 'Struktur məşğulluq geriləməsi',
+  industry_va_pct_gdp: 'Yüksəlişdən sonra ortalama dəyərə qayıdış',
+  gross_capital_formation_pct: 'Dövrlü, aşağı ortalama təsir',
+  trade_pct_gdp: 'Kiçik, dayanıqlı töhfə',
+  brent_annual_avg_usd: 'Xarici şokların ötürücüsü',
 }
 
 type ShapRow = {
@@ -389,7 +402,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A] mb-2">XGBoost</p>
               <p className="text-sm text-[#6B6B6B] leading-relaxed">
                 {lang === 'az'
-                  ? 'Hər biri əvvəlkinin xətalarını düzəldən qərar ağacları ansamblu quran gradient artırma alqoritmi. Kiçik cədvəl məlumat bazalarında (34 illik müşahidə) yüksək dəqiqliyi ilə seçilmişdir.'
+                  ? 'Hər biri özündən əvvəlkinin səhvlərini düzəldən qərar ağacları (decision trees) ansamblı yaradan gradient boosting alqoritmidir. Kiçik cədvəl formatlı verilənlərdə (34 illik müşahidə) yüksək dəqiqliyinə görə seçilmişdir.'
                   : 'A gradient boosting algorithm that builds an ensemble of decision trees, each correcting errors of the previous. Chosen for accuracy on small tabular datasets (34 annual observations).'}
               </p>
             </div>
@@ -397,7 +410,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A] mb-2">SHAP</p>
               <p className="text-sm text-[#6B6B6B] leading-relaxed">
                 {lang === 'az'
-                  ? 'Hər sektora həmin ilin ÜDM artım proqnozunda ədalətli marjinal töhfə təyin edən metod — kooperativ oyun nəzəriyyəsindən götürülmüşdür.'
+                  ? 'SHapley Additive exPlanations — kooperativ oyunlar nəzəriyyəsinə (Game Theory) əsaslanaraq, həmin ilki ÜDM artımı proqnozunda hər bir sektorun cəmi artıma olan marjinal töhfəsini dəqiq şəkildə bölüşdürür.'
                   : "SHapley Additive exPlanations — assigns each sector a fair marginal contribution to that year's GDP growth prediction, derived from cooperative game theory."}
               </p>
             </div>
@@ -407,7 +420,7 @@ export default function SHAPWaterfall({ importanceData, sectorSummary }: Props) 
               </p>
               <p className="text-sm text-[#6B6B6B] leading-relaxed">
                 {lang === 'az'
-                  ? 'f.b. = faiz bəndi. +1 f.b. SHAP dəyəri həmin sektorun o ildə model bazasının üzərindəki ÜDM artımına 1 faiz bəndi əlavə etdiyini bildirir.'
+                  ? 'f.b. = faiz bəndi. +1 f.b. SHAP dəyəri, müvafiq sektorun həmin il ÜDM artımına modelin baza xəttindən əlavə 1 faiz bəndi töhfə verdiyini bildirir.'
                   : "pp = percentage points. A +1pp SHAP value means that sector added 1 percentage point to GDP growth that year above the model baseline."}
               </p>
             </div>
